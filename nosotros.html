@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nosotros - Athlex</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- Barra de navegación del cliente -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">🏃 Athlex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuCliente" aria-controls="menuCliente" aria-expanded="false" aria-label="Desplegar menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuCliente">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><span class="nav-link text-secondary" id="usuarioNav"></span></li>
+                    <li class="nav-item"><a class="nav-link link-sesion" href="#" id="salirSesion">Cerrar sesión</a></li>
+                </ul>
+                <a class="btn btn-acento ms-lg-3 d-inline-flex align-items-center gap-2" href="carrito.html">
+                    🛒 Carrito
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido de la página Nosotros -->
+    <main class="py-5">
+        <div class="container">
+
+            <h1 class="h2 text-center mb-4">Sobre Nosotros</h1>
+
+            <div class="row align-items-center mb-5">
+                <div class="col-md-5 mb-3 mb-md-0">
+                    <img src="https://picsum.photos/seed/tienda/600/400" class="img-fluid rounded" alt="La tienda Athlex">
+                </div>
+                <div class="col-md-7">
+                    <h2 class="h4">Nuestra empresa</h2>
+                    <p>
+                        <strong>Athlex</strong> es una importadora chilena de ropa y artículos deportivos.
+                        Nacimos con la misión de llevar el deporte al alcance de todos, entregando productos
+                        de calidad a precios justos, tanto en tiendas físicas como en nuestro nuevo canal en línea.
+                    </p>
+                    <p>
+                        Creemos que cada persona merece equiparse bien para entrenar y superar sus propios
+                        límites, por eso seleccionamos cuidadosamente cada artículo que llega a nuestro catálogo.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="h4 text-center mb-4">Nuestro equipo de desarrollo</h2>
+            <div class="row justify-content-center g-4">
+
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-3 bg-dark text-white">
+                        <div class="display-5 mb-2">👨‍💻</div>
+                        <h3 class="h5">Benjamin Astudillo</h3>
+                        <p class="small mb-0">
+                            Líder del proyecto. Encargado de la página principal, los estilos de la marca
+                            y el diseño general de la tienda.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-3 bg-dark text-white">
+                        <div class="display-5 mb-2">👨‍💻</div>
+                        <h3 class="h5">Williams Contreras</h3>
+                        <p class="small mb-0">
+                            Encargado del detalle del producto "Zapatilla Runner Pro" y de la página
+                            de Nosotros.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 text-center p-3 bg-dark text-white">
+                        <div class="display-5 mb-2">👨‍💻</div>
+                        <h3 class="h5">Jonathan Garrido</h3>
+                        <p class="small mb-0">
+                            Encargado del detalle del producto "Polera Deportiva Air", la validación de los
+                            formularios y el panel del administrador.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-5">
+                <a class="btn btn-acento" href="productos.html">Ir a la tienda</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="border-top py-4 mt-5">
+        <div class="container">
+            <div class="row text-center text-md-start align-items-center">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <p class="mb-0 text-secondary">© 2026 Athlex - Tienda Deportiva</p>
+                </div>
+                <div class="col-md-8 text-md-end">
+                    <a href="productos.html" class="text-secondary me-3 text-decoration-none">Productos</a>
+                    <a href="contacto.html" class="text-secondary me-3 text-decoration-none">Contacto</a>
+                    <a href="carrito.html" class="text-secondary text-decoration-none">Carrito</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Bootstrap + lógica del proyecto) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/sesion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            pintarSesion();
+            var salir = document.getElementById("salirSesion");
+            if (salir) {
+                salir.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    cerrarSesionCliente();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
