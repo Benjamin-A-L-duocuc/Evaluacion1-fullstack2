@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Athlex - Tienda Deportiva</title>
+    <!-- Hoja de estilos de Bootstrap (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Hoja de estilos propia del proyecto -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- Barra de navegación del cliente -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">🏃 Athlex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuCliente" aria-controls="menuCliente" aria-expanded="false" aria-label="Desplegar menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuCliente">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="home.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><span class="nav-link text-secondary" id="usuarioNav"></span></li>
+                    <li class="nav-item"><a class="nav-link link-sesion" href="#" id="salirSesion">Cerrar sesión</a></li>
+                </ul>
+                <a class="btn btn-acento ms-lg-3 d-inline-flex align-items-center gap-2" href="carrito.html">
+                    🛒 Carrito
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero de la tienda -->
+    <header class="hero py-5">
+        <div class="container py-lg-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <span class="badge badge-marca mb-3">Nueva temporada 2026</span>
+                    <h1 class="display-4 fw-bold">Viste tu mejor versión</h1>
+                    <p class="lead mb-4">Ropa y artículos deportivos importados para rendir al máximo, con envío a todo Chile.</p>
+                    <div class="d-flex flex-column flex-sm-row gap-2">
+                        <a href="productos.html" class="btn btn-acento btn-lg">Comprar ahora</a>
+                        <a href="nosotros.html" class="btn btn-outline-acento btn-lg">Conócenos</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://picsum.photos/seed/athlex/600/400" alt="Tienda Athlex" class="img-fluid hero-imagen">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Franja de beneficios -->
+    <section class="py-4 border-bottom" style="border-color:#333 !important;">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="beneficio">
+                        <div class="icono">🚚</div>
+                        <h3>Envío a todo Chile</h3>
+                        <p>Despacho a domicilio y puntos de retiro.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="beneficio">
+                        <div class="icono">🔒</div>
+                        <h3>Pago seguro</h3>
+                        <p>Compra protegida con los medios que prefieras.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="beneficio">
+                        <div class="icono">↩️</div>
+                        <h3>Cambios fáciles</h3>
+                        <p>Cambia o devuelve tu pedido sin complicaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos destacados -->
+    <main class="py-5">
+        <div class="container">
+            <div class="encabezado-panel mb-4">
+                <div>
+                    <h2 class="mb-1">Productos destacados</h2>
+                    <p class="text-secondary mb-0">Lo más vendido de la temporada.</p>
+                </div>
+                <a class="btn btn-outline-acento" href="productos.html">Ver todos</a>
+            </div>
+
+            <div class="row justify-content-center g-4">
+
+                <!-- Tarjeta producto 1 -->
+                <div class="col-md-5">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.riNF-o05orDIqbOdNarJGwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=f71b4017752ea36deaf6a56d3984196563b0ccd82866d6d66dafe770edd7e570&ipo=images" class="card-img-top img-producto" alt="Zapatilla Runner Pro">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Calzado</span>
+                            <h3 class="card-title h5">Zapatilla Runner Pro</h3>
+                            <p class="text-secondary small">Ligera, amortiguada y con suela antideslizante.</p>
+                            <p class="precio mb-3">$49.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto1.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 2 -->
+                <div class="col-md-5">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.8Qxt_8PojP1zTjAG55KxoAHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=d9d9c64df9ecf0d4679624b157fcaa654f382710af68c11ba6ef5820301b2e35&ipo=images" class="card-img-top img-producto" alt="Polera Deportiva Air">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Ropa</span>
+                            <h3 class="card-title h5">Polera Deportiva Air</h3>
+                            <p class="text-secondary small">Transpirable, fresca y de corte deportivo.</p>
+                            <p class="precio mb-3">$24.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto2.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Categorías -->
+    <section class="pb-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Explora por categoría</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <a href="productos.html" class="categoria">
+                        <img src="https://picsum.photos/seed/calzado/600/400" alt="Calzado">
+                        <span class="categoria-nombre">Calzado deportivo</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="productos.html" class="categoria">
+                        <img src="https://picsum.photos/seed/ropa/600/400" alt="Ropa">
+                        <span class="categoria-nombre">Ropa de entrenamiento</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="newsletter p-4 p-md-5 text-center">
+                <h2 class="h4 mb-2">Recibe ofertas y novedades</h2>
+                <p class="text-secondary mb-4">Suscríbete y entérate antes que nadie de nuestras promociones.</p>
+                <form class="row g-2 justify-content-center" onsubmit="return false;">
+                    <div class="col-md-6 col-lg-5">
+                        <input type="email" class="form-control text-center text-md-start" placeholder="tucorreo@duoc.cl" maxlength="100">
+                    </div>
+                    <div class="col-md-auto">
+                        <button type="submit" class="btn btn-acento px-4">Suscribirme</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="border-top py-4 mt-2">
+        <div class="container">
+            <div class="row text-center text-md-start align-items-center">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <p class="mb-0 text-secondary">© 2026 Athlex - Tienda Deportiva</p>
+                </div>
+                <div class="col-md-8 text-md-end">
+                    <a href="productos.html" class="text-secondary me-3 text-decoration-none">Productos</a>
+                    <a href="nosotros.html" class="text-secondary me-3 text-decoration-none">Nosotros</a>
+                    <a href="contacto.html" class="text-secondary me-3 text-decoration-none">Contacto</a>
+                    <a href="carrito.html" class="text-secondary text-decoration-none">Carrito</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Bootstrap + lógica del proyecto) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/sesion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            pintarSesion();
+            var salir = document.getElementById("salirSesion");
+            if (salir) {
+                salir.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    cerrarSesionCliente();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

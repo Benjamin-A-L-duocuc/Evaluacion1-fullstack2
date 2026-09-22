@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Athlex - Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- Barra de navegación del cliente -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">🏃 Athlex</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuCliente" aria-controls="menuCliente" aria-expanded="false" aria-label="Desplegar menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuCliente">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><span class="nav-link text-secondary" id="usuarioNav"></span></li>
+                    <li class="nav-item"><a class="nav-link link-sesion" href="#" id="salirSesion">Cerrar sesión</a></li>
+                </ul>
+                <a class="btn btn-acento ms-lg-3 d-inline-flex align-items-center gap-2" href="carrito.html">
+                    🛒 Carrito
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado de la tienda de productos -->
+    <header class="hero py-5">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-2">Catálogo de productos</h1>
+            <p class="lead mb-0">Ropa y artículos deportivos seleccionados para tu entrenamiento.</p>
+        </div>
+    </header>
+
+    <!-- Lista de productos -->
+    <main class="py-5">
+        <div class="container">
+            <div class="row justify-content-center g-4">
+
+                <!-- Tarjeta producto 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.riNF-o05orDIqbOdNarJGwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=f71b4017752ea36deaf6a56d3984196563b0ccd82866d6d66dafe770edd7e570&ipo=images" class="card-img-top img-producto" alt="Zapatilla Runner Pro">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Calzado</span>
+                            <h2 class="card-title h5">Zapatilla Runner Pro</h2>
+                            <p class="text-secondary small">Zapatilla ligera de running con amortiguación.</p>
+                            <p class="precio mb-3">$49.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto1.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.8Qxt_8PojP1zTjAG55KxoAHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=d9d9c64df9ecf0d4679624b157fcaa654f382710af68c11ba6ef5820301b2e35&ipo=images" class="card-img-top img-producto" alt="Polera Deportiva Air">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Ropa</span>
+                            <h2 class="card-title h5">Polera Deportiva Air</h2>
+                            <p class="text-secondary small">Polera transpirable de corte deportivo.</p>
+                            <p class="precio mb-3">$24.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto2.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F4.bp.blogspot.com%2F-Xzh8TNAqfbE%2FW7h_JGC9c6I%2FAAAAAAAATUU%2F1_dpqIKQOKkG74KhSrzbTrweOvohdrZqgCK4BGAYYCw%2Fs1600%2Fvlcsnap-2018-10-05-09h20m18s940.jpg&f=1&nofb=1&ipt=9b230fb075939bed8afc33a08438c8ee22239494a3870978a9f18ee33890485c" class="card-img-top img-producto" alt="Anillas de Gimnasia">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Accesorios</span>
+                            <h2 class="card-title h5">Anillas de Gimnasia</h2>
+                            <p class="text-secondary small">Anillas de calistenia con correas ajustables.</p>
+                            <p class="precio mb-3">$19.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto3.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.9rfrzHHHJWw8N6SGX7SNAQHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=339d641f1fd946dceabae577c80acfd12dca738cdec692fa23317daee19d72c7&ipo=images" class="card-img-top img-producto" alt="Mancuernas Ajustables">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Accesorios</span>
+                            <h2 class="card-title h5">Mancuernas Ajustables</h2>
+                            <p class="text-secondary small">Par de mancuernas con ajuste rápido de peso.</p>
+                            <p class="precio mb-3">$29.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto4.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.MWyfey9tZ5bYfidUO3Og2AHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=c5c7d81c077aa5d17a6802f49575136987ff83cee8dce05647eae32b3ae40c97&ipo=images" class="card-img-top img-producto" alt="Short Deportivo Flex">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Ropa</span>
+                            <h2 class="card-title h5">Short Deportivo Flex</h2>
+                            <p class="text-secondary small">Short de entrenamiento de secado rápido.</p>
+                            <p class="precio mb-3">$14.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto5.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta producto 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-producto bg-dark text-white h-100">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.xHBJpqmxuNg0m_LC4DYTrwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=7d79a1ea868360a793dc40b8f813375e3b1711cc5cbe651a6d19bf88e2d4bf06&ipo=images" class="card-img-top img-producto" alt="Paleta de Tenis de Mesa">
+                        <div class="card-body">
+                            <span class="badge badge-stock mb-2">Accesorios</span>
+                            <h2 class="card-title h5">Paleta de Tenis de Mesa</h2>
+                            <p class="text-secondary small">Paleta de ping pong con agarre y control.</p>
+                            <p class="precio mb-3">$21.990</p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="producto6.html" class="btn btn-acento flex-fill">Ver detalle</a>
+                                <a href="#" class="btn btn-outline-acento flex-fill">Añadir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="border-top py-4 mt-2">
+        <div class="container">
+            <div class="row text-center text-md-start align-items-center">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <p class="mb-0 text-secondary">© 2026 Athlex - Tienda Deportiva</p>
+                </div>
+                <div class="col-md-8 text-md-end">
+                    <a href="home.html" class="text-secondary me-3 text-decoration-none">Inicio</a>
+                    <a href="nosotros.html" class="text-secondary me-3 text-decoration-none">Nosotros</a>
+                    <a href="contacto.html" class="text-secondary me-3 text-decoration-none">Contacto</a>
+                    <a href="carrito.html" class="text-secondary text-decoration-none">Carrito</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Bootstrap + lógica del proyecto) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/datos.js"></script>
+    <script src="js/sesion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            pintarSesion();
+            var salir = document.getElementById("salirSesion");
+            if (salir) {
+                salir.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    cerrarSesionCliente();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
