@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos - Panel administrador - Athlex</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../estilos.css">
+</head>
+<body>
+
+    <div class="container py-4">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-3 mb-4 px-3">
+            <a class="navbar-brand fw-bold" href="index.html">🏃 Athlex <small class="text-secondary fw-normal">· Admin</small></a>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <span class="text-secondary small d-none d-md-inline" id="usuarioNav"></span>
+            </div>
+        </nav>
+
+        <div class="row g-4">
+
+            <!-- Menú vertical del administrador -->
+            <div class="col-md-3">
+                <div class="admin-menu">
+                    <p class="menu-titulo mb-0">Gestión</p>
+                    <a href="index.html">Inicio</a>
+                    <a class="activo" href="productos.html">Productos</a>
+                    <a href="ventas.html">Ventas</a>
+                    <p class="menu-titulo mb-0 mt-3">Cuenta</p>
+                    <a href="javascript:void(0)" onclick="cerrarSesionAdmin()">Cerrar sesión</a>
+                </div>
+            </div>
+
+            <!-- Contenido central -->
+            <div class="col-md-9">
+                <div class="encabezado-panel mb-4">
+                    <div>
+                        <h1 class="h3 mb-1">Gestión de productos</h1>
+                        <p class="text-secondary mb-0">Administra los productos disponibles en tu sitio.</p>
+                    </div>
+                </div>
+
+                <!-- Listado de productos -->
+                <div class="card p-3 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h2 class="h5 mb-0">Productos en el catálogo</h2>
+                        <span class="text-secondary small">6 productos</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table tabla-admin align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ZAP-RUN-01</td>
+                                    <td>Zapatilla Runner Pro</td>
+                                    <td>Calzado</td>
+                                    <td class="clave-precio">$49.990</td>
+                                    <td>25</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>POL-AIR-02</td>
+                                    <td>Polera Deportiva Air</td>
+                                    <td>Ropa</td>
+                                    <td class="clave-precio">$24.990</td>
+                                    <td>18</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ANI-CAL-03</td>
+                                    <td>Anillas de Gimnasia</td>
+                                    <td>Accesorios</td>
+                                    <td class="clave-precio">$19.990</td>
+                                    <td>30</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>MAN-AJU-04</td>
+                                    <td>Mancuernas Ajustables</td>
+                                    <td>Accesorios</td>
+                                    <td class="clave-precio">$29.990</td>
+                                    <td>15</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SHO-FLX-05</td>
+                                    <td>Short Deportivo Flex</td>
+                                    <td>Ropa</td>
+                                    <td class="clave-precio">$14.990</td>
+                                    <td>40</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PAL-TME-06</td>
+                                    <td>Paleta de Tenis de Mesa</td>
+                                    <td>Accesorios</td>
+                                    <td class="clave-precio">$21.990</td>
+                                    <td>20</td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" title="Editar">✏️</a>
+                                        <a href="#" class="ms-2" title="Eliminar">🗑️</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6" class="text-secondary small">
+                                        Los botones de edición y eliminación son de demostración visual.
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Ventana emergente para editar un producto (demostración visual) -->
+                <div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarProductoLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="h5 modal-title" id="modalEditarProductoLabel">Editar producto</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- Mismos campos que el formulario de creación, vacíos -->
+                                <form id="formEditarProducto" novalidate>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarCodigoProducto" class="form-label">Código del producto</label>
+                                            <input type="text" class="form-control" id="editarCodigoProducto" maxlength="20" placeholder="ZAP-RUN-01">
+                                            <div class="error-msj" id="errorEditarCodigoProducto"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarNombreProducto" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="editarNombreProducto" maxlength="100" placeholder="Zapatilla Runner Pro">
+                                            <div class="error-msj" id="errorEditarNombreProducto"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarCategoriaProducto" class="form-label">Categoría</label>
+                                            <select class="form-select" id="editarCategoriaProducto">
+                                                <option value="">-- Selecciona una categoría --</option>
+                                                <option value="Calzado">Calzado</option>
+                                                <option value="Ropa">Ropa</option>
+                                                <option value="Accesorios">Accesorios</option>
+                                            </select>
+                                            <div class="error-msj" id="errorEditarCategoriaProducto"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="editarDescripcionProducto" class="form-label">Descripción (opcional)</label>
+                                        <textarea class="form-control" id="editarDescripcionProducto" rows="3" maxlength="500" placeholder="Descripción breve del producto"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarPrecioProducto" class="form-label">Precio</label>
+                                            <input type="text" class="form-control" id="editarPrecioProducto" placeholder="49990">
+                                            <div class="error-msj" id="errorEditarPrecioProducto"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarStockProducto" class="form-label">Stock</label>
+                                            <input type="text" class="form-control" id="editarStockProducto" placeholder="25">
+                                            <div class="error-msj" id="errorEditarStockProducto"></div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="editarStockCriticoProducto" class="form-label">Stock crítico (alertas)</label>
+                                            <input type="text" class="form-control" id="editarStockCriticoProducto" placeholder="5">
+                                            <div class="error-msj" id="errorEditarStockCriticoProducto"></div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <p class="text-secondary small mb-0">
+                                    Demostración visual: el formulario no modifica datos reales.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-acento" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-acento">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario nuevo producto -->
+                <div class="card p-4">
+                    <h2 class="h5 mb-3">Agregar producto al catálogo</h2>
+
+                    <form id="formProducto" novalidate>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="codigoProducto" class="form-label">Código del producto</label>
+                                <input type="text" class="form-control" id="codigoProducto" maxlength="20" placeholder="ZAP-RUN-01">
+                                <div class="error-msj" id="errorCodigoProducto"></div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="nombreProducto" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreProducto" maxlength="100" placeholder="Zapatilla Runner Pro">
+                                <div class="error-msj" id="errorNombreProducto"></div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="categoriaProducto" class="form-label">Categoría</label>
+                                <select class="form-select" id="categoriaProducto">
+                                    <option value="">-- Selecciona una categoría --</option>
+                                    <option value="Calzado">Calzado</option>
+                                    <option value="Ropa">Ropa</option>
+                                    <option value="Accesorios">Accesorios</option>
+                                </select>
+                                <div class="error-msj" id="errorCategoriaProducto"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcionProducto" class="form-label">Descripción (opcional)</label>
+                            <textarea class="form-control" id="descripcionProducto" rows="3" maxlength="500" placeholder="Descripción breve del producto"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="precioProducto" class="form-label">Precio</label>
+                                <input type="text" class="form-control" id="precioProducto" placeholder="49990">
+                                <div class="error-msj" id="errorPrecioProducto"></div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stockProducto" class="form-label">Stock</label>
+                                <input type="text" class="form-control" id="stockProducto" placeholder="25">
+                                <div class="error-msj" id="errorStockProducto"></div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stockCriticoProducto" class="form-label">Stock crítico (alertas)</label>
+                                <input type="text" class="form-control" id="stockCriticoProducto" placeholder="5">
+                                <div class="error-msj" id="errorStockCriticoProducto"></div>
+                            </div>
+                        </div>
+
+                        <div class="alert aviso-ok d-none" id="avisoProducto"></div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-acento">Agregar producto</button>
+                            <button type="reset" class="btn btn-outline-acento">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts (Bootstrap + lógica del proyecto) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/datos.js"></script>
+    <script src="../js/validaciones.js"></script>
+    <script src="../js/sesion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            pintarSesion();
+        });
+    </script>
+    <script src="../js/admin-productos.js"></script>
+
+</body>
+</html>
