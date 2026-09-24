@@ -12,8 +12,8 @@ function reglaNombreContacto(valor) {
 }
 
 function reglaCorreoContacto(valor) {
-    if (validarLargoMax(valor, 100) && esVacio(valor)) return null;
-    if (!esVacio(valor) && !validarLargoMax(valor, 100)) return "Máximo 100 caracteres.";
+    if (esVacio(valor)) return null; // opcional
+    if (!validarLargoMax(valor, 100)) return "Máximo 100 caracteres.";
     if (!validarCorreoDominio(valor)) {
         return "Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
     }
@@ -27,29 +27,29 @@ function reglaComentarioContacto(valor) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("formContacto");
+    var form = document.getElementById("formContacto");
     if (!form) return;
 
     configurarValidacionEnVivo("nombreContacto", "errorNombreContacto", reglaNombreContacto);
     configurarValidacionEnVivo("correoContacto", "errorCorreoContacto", reglaCorreoContacto);
     configurarValidacionEnVivo("comentarioContacto", "errorComentarioContacto", reglaComentarioContacto);
 
-    const contador = document.getElementById("contadorComentario");
-    const comentario = document.getElementById("comentarioContacto");
+    var contador = document.getElementById("contadorComentario");
+    var comentario = document.getElementById("comentarioContacto");
     if (contador && comentario) {
         comentario.addEventListener("input", function () {
             contador.textContent = comentario.value.length + " / 500";
         });
     }
 
-    const aviso = document.getElementById("avisoContacto");
+    var aviso = document.getElementById("avisoContacto");
 
     form.addEventListener("submit", function (evento) {
         evento.preventDefault();
 
-        const nombreOk = validarCampo(document.getElementById("nombreContacto"), "errorNombreContacto", reglaNombreContacto);
-        const correoOk = validarCampo(document.getElementById("correoContacto"), "errorCorreoContacto", reglaCorreoContacto);
-        const comentarioOk = validarCampo(document.getElementById("comentarioContacto"), "errorComentarioContacto", reglaComentarioContacto);
+        var nombreOk = validarCampo(document.getElementById("nombreContacto"), "errorNombreContacto", reglaNombreContacto);
+        var correoOk = validarCampo(document.getElementById("correoContacto"), "errorCorreoContacto", reglaCorreoContacto);
+        var comentarioOk = validarCampo(document.getElementById("comentarioContacto"), "errorComentarioContacto", reglaComentarioContacto);
 
         if (!nombreOk || !correoOk || !comentarioOk) return;
 

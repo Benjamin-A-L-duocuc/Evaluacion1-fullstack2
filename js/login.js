@@ -1,64 +1,64 @@
 /* =========================================================
    AthlexStore - login.js
    Inicio de sesión: valida el formulario, revisa las cuentas
-   y redirige según el perfil (Cliente o Administrador).
+   de demostración y redirige según el perfil.
    ========================================================= */
 
+/* Cuentas de acceso (desarrollo)
+   La tienda distingue dos perfiles: Cliente y Administrador. */
+var cuentas = [
+    {
+        correo: "admin@duoc.cl",
+        clave: "admin123",
+        tipo: "Administrador",
+        nombre: "Admin Athlex"
+    },
+    {
+        correo: "cliente@duoc.cl",
+        clave: "client1",
+        tipo: "Cliente",
+        nombre: "Jonathan"
+    }
+];
+
+function reglaCorreoLogin(valor) {
+    if (!validarRequerido(valor)) return "El correo es requerido.";
+    if (!validarLargoMax(valor, 100)) return "Máximo 100 caracteres.";
+    if (!validarCorreoDominio(valor)) {
+        return "Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
+    }
+    return null;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("formLogin");
-    const campoCorreo = document.getElementById("correoLogin");
-    const campoClave = document.getElementById("claveLogin");
-    const aviso = document.getElementById("avisoLogin");
+    var form = document.getElementById("formLogin");
+    var campoCorreo = document.getElementById("correoLogin");
+    var campoClave = document.getElementById("claveLogin");
+    var aviso = document.getElementById("avisoLogin");
 
     if (!form) return;
 
-    /* Validación en tiempo real (material: form-validaciones) */
-    configurarValidacionEnVivo("correoLogin", "errorCorreoLogin", function (valor) {
-        if (!validarRequerido(valor)) return "El correo es requerido.";
-        if (String(valor).length > 100) return "Máximo 100 caracteres.";
-        if (!validarCorreoDominio(valor)) {
-            return "Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
-        }
-        return null;
-    });
-
-    configurarValidacionEnVivo("claveLogin", "errorClaveLogin", function (valor) {
-        if (!validarRequerido(valor)) return "La contraseña es requerida.";
-        if (!validarRangoLargo(valor, 4, 10)) return "La contraseña debe tener entre 4 y 10 caracteres.";
-        return null;
-    });
+    /* Validación en tiempo real */
+    configurarValidacionEnVivo("correoLogin", "errorCorreoLogin", reglaCorreoLogin);
+    configurarValidacionEnVivo("claveLogin", "errorClaveLogin", reglaClave);
 
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        let correcto = true;
-
-        if (!validarCampo(campoCorreo, "errorCorreoLogin", function (valor) {
-            if (!validarRequerido(valor)) return "El correo es requerido.";
-            if (String(valor).length > 100) return "Máximo 100 caracteres.";
-            if (!validarCorreoDominio(valor)) {
-                return "Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
-            }
-            return null;
-        })) {
-            correcto = false;
-        }
-
-        if (!validarCampo(campoClave, "errorClaveLogin", function (valor) {
-            if (!validarRequerido(valor)) return "La contraseña es requerida.";
-            if (!validarRangoLargo(valor, 4, 10)) return "La contraseña debe tener entre 4 y 10 caracteres.";
-            return null;
-        })) {
-            correcto = false;
-        }
-
+        var correcto = true;
+        if (!validarCampo(campoCorreo, "errorCorreoLogin", reglaCorreoLogin)) correcto = false;
+        if (!validarCampo(campoClave, "errorClaveLogin", reglaClave)) correcto = false;
         if (!correcto) return;
 
         /* Verificar credenciales contra las cuentas locales */
-        const correo = String(campoCorreo.value).trim().toLowerCase();
-        const usuario = cuentas.find(function (c) {
-            return c.correo.toLowerCase() === correo && c.clave === campoClave.value;
-        });
+        var correo = String(campoCorreo.value).trim().toLowerCase();
+        var usuario = null;
+        for (var i = 0; i < cuentas.length; i++) {
+            if (cuentas[i].correo.toLowerCase() === correo && cuentas[i].clave === campoClave.value) {
+                usuario = cuentas[i];
+                break;
+            }
+        }
 
         if (!usuario) {
             aviso.classList.remove("d-none");

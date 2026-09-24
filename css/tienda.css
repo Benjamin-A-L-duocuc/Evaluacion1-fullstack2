@@ -1,0 +1,117 @@
+/* =========================================================
+   Athlex Store - tienda.css
+   Estilos de las páginas de la tienda (cliente):
+   home, productos, nosotros, contacto y carrito.
+   ========================================================= */
+
+/* ===== Hero (página principal de la tienda) ===== */
+.hero {
+    background: linear-gradient(135deg, #1c1c1c 0%, var(--fondo) 55%, #2a1504 100%);
+    border-bottom: 1px solid var(--borde);
+}
+
+.hero .badge-marca {
+    background-color: rgba(255, 107, 0, 0.15);
+    color: var(--acento);
+    border: 1px solid var(--acento);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero-imagen {
+    border-radius: 12px;
+    border: 1px solid var(--borde);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* Franja de beneficios */
+.beneficio {
+    text-align: center;
+    padding: 1rem;
+}
+
+.beneficio .icono {
+    font-size: 2rem;
+}
+
+.beneficio h3 {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.beneficio p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    margin-bottom: 0;
+}
+
+/* Categorías */
+.categoria {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--borde);
+    text-decoration: none;
+}
+
+.categoria img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+    transition: transform 0.2s ease;
+}
+
+.categoria:hover img {
+    transform: scale(1.04);
+}
+
+.categoria .categoria-nombre {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Banda de newsletter */
+.newsletter {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+}
+
+/* Tarjeta de producto de la tienda */
+.card-producto .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-producto .btn {
+    margin-top: auto;
+}
+
+.badge-stock {
+    background-color: #262626;
+    color: var(--texto-secundario);
+    border: 1px solid var(--borde);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Texto destacado del hero */
+.lead {
+    color: var(--texto-secundario);
+}
+
+@media (max-width: 768px) {
+    .hero .btn-lg {
+        width: 100%;
+    }
+}

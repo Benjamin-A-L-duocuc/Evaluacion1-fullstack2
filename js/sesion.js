@@ -5,13 +5,16 @@
    el flujo de inicio y cierre de sesión.
    ========================================================= */
 
+/* Clave usada en sessionStorage para mantener la sesión del usuario */
+var CLAVE_SESION = "athlex_sesion";
+
 function guardarSesion(usuario) {
     sessionStorage.setItem(CLAVE_SESION, JSON.stringify(usuario));
 }
 
 function obtenerSesion() {
     try {
-        const dato = sessionStorage.getItem(CLAVE_SESION);
+        var dato = sessionStorage.getItem(CLAVE_SESION);
         return dato ? JSON.parse(dato) : null;
     } catch (e) {
         return null;
@@ -24,8 +27,8 @@ function cerrarSesion() {
 
 /* Muestra el nombre del usuario en la barra de navegación */
 function pintarSesion() {
-    const sesion = obtenerSesion();
-    const campo = document.getElementById("usuarioNav");
+    var sesion = obtenerSesion();
+    var campo = document.getElementById("usuarioNav");
     if (campo) {
         campo.textContent = sesion ? "Hola, " + sesion.nombre : "";
     }
