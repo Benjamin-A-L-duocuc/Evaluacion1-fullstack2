@@ -1,0 +1,49 @@
+/* =========================================================
+   Athlex Store - portada.css
+   Estilos de la página de ingreso (index.html):
+   inicio de sesión y creación de cuenta (registro).
+   ========================================================= */
+
+/* ===== Portada (login / registro) ===== */
+.pagina-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 107, 0, 0.18), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(255, 107, 0, 0.12), transparent 45%),
+        var(--fondo);
+    padding: 2rem 1rem;
+}
+
+.tarjeta-login {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 420px;
+    width: 100%;
+}
+
+.aviso-login-rol .list-group-item {
+    background-color: transparent;
+    color: var(--texto-secundario);
+    border-color: var(--borde);
+    font-size: 0.85rem;
+}
+
+/* Pestañas Ingresar / Crear cuenta */
+#tabsLogin .nav-link {
+    background-color: #f1f3f5;
+    color: var(--texto-secundario);
+    border: 1px solid var(--borde);
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+}
+
+#tabsLogin .nav-link.active {
+    background-color: var(--acento);
+    border-color: var(--acento);
+    color: #ffffff;
+}

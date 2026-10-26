@@ -1,0 +1,108 @@
+/* =========================================================
+   Athlex Store - producto.css
+   Estilos de las páginas de detalle de producto (producto1-6).
+   ========================================================= */
+
+/* Carrusel de imágenes del producto */
+.img-carousel {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    background-color: #262626;
+    border-radius: 12px;
+}
+
+.carousel-tienda {
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #262626;
+}
+
+.carousel-tienda .carousel-indicators {
+    margin-bottom: 0.5rem;
+}
+
+.carousel-tienda .carousel-indicators button {
+    background-color: #ffffff;
+}
+
+.carousel-tienda .carousel-control-prev-icon,
+.carousel-tienda .carousel-control-next-icon {
+    filter: invert(1);
+}
+
+/* Valoración del producto (estrellas) */
+.valoracion {
+    color: #ffc107;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.valoracion .texto {
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    letter-spacing: 0;
+}
+
+/* Selector de talla (botones de demostración) */
+.opcion-talla {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 40px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    background-color: #262626;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.opcion-talla:hover {
+    border-color: var(--acento);
+    color: var(--acento);
+}
+
+/* Sección de información del detalle */
+.detalle-seccion {
+    border-top: 1px solid var(--borde);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.detalle-seccion h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.lista-marca li {
+    margin-bottom: 0.4rem;
+}
+
+.lista-marca .marca-item {
+    color: var(--acento);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.badge-servicio {
+    background-color: #262626;
+    border: 1px solid var(--borde);
+    color: #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem;
+}
+
+.badge-servicio .icono {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .img-carousel {
+        height: 280px;
+    }
+}

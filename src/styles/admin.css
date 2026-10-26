@@ -1,0 +1,71 @@
+/* =========================================================
+   Athlex Store - admin.css
+   Estilos del panel administrador (admin/index, productos,
+   ventas): menú lateral, tablas resumen y alertas.
+   ========================================================= */
+
+/* Menú lateral del administrador */
+.admin-menu {
+    background-color: var(--superficie);
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    padding: 1rem 0;
+}
+
+.admin-menu a {
+    display: block;
+    color: #e9ecef;
+    text-decoration: none;
+    padding: 0.6rem 1.25rem;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-menu a:hover {
+    background-color: #232323;
+    border-left-color: var(--acento);
+}
+
+.admin-menu a.activo {
+    background-color: #232323;
+    border-left-color: var(--acento);
+    color: var(--acento);
+    font-weight: 600;
+}
+
+.admin-menu .menu-titulo {
+    padding: 0 1.25rem 0.5rem;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+}
+
+/* Tarjetas resumen del dashboard */
+.tabla-resumen {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.tabla-resumen .numero {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--acento);
+}
+
+.tabla-resumen .etiqueta {
+    color: var(--texto-secundario);
+}
+
+/* Alerta de stock o estado */
+.alerta-stock {
+    background-color: #ffeb3b;
+    color: #1c1c1c;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
