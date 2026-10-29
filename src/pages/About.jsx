@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import Boton from "../components/Boton";
 
 function About() {
     return (
@@ -69,9 +69,7 @@ function About() {
                 </Row>
 
                 <div className="text-center mt-5">
-                    <Link className="btn btn-acento" to="/productos">
-                        Ir a la tienda
-                    </Link>
+                    <Boton to="/productos">Ir a la tienda</Boton>
                 </div>
             </Container>
         </main>

@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
-import { formatoCL } from "../utils/formato";
+import Boton from "../components/Boton";
+import Precio from "../components/Precio";
 
 function Success() {
     const ubicacion = useLocation();
@@ -65,9 +66,11 @@ function Success() {
                                                         <tr key={item.productoId + "-" + item.precioUnitario}>
                                                             <td>{item.nombre}</td>
                                                             <td>{item.cantidad}</td>
-                                                            <td className="clave-precio">
-                                                                {formatoCL(item.subtotal)}
-                                                            </td>
+                                                            <Precio
+                                                                as="td"
+                                                                className="clave-precio"
+                                                                valor={item.subtotal}
+                                                            />
                                                         </tr>
                                                     );
                                                 })}
@@ -77,19 +80,23 @@ function Success() {
 
                                     <div className="d-flex justify-content-between mb-1">
                                         <span className="text-secondary">Subtotal</span>
-                                        <span>{formatoCL(resumen.subtotal)}</span>
+                                        <Precio valor={resumen.subtotal} />
                                     </div>
                                     <div className="d-flex justify-content-between mb-2">
                                         <span className="text-secondary">Envío</span>
-                                        <span>
-                                            {resumen.envio === 0
-                                                ? "Gratis"
-                                                : formatoCL(resumen.envio)}
-                                        </span>
+                                        {resumen.envio === 0 ? (
+                                            <span>Gratis</span>
+                                        ) : (
+                                            <Precio valor={resumen.envio} />
+                                        )}
                                     </div>
                                     <div className="d-flex justify-content-between align-items-center mb-4">
                                         <span className="fs-5">Total pagado</span>
-                                        <span className="precio">{formatoCL(resumen.total)}</span>
+                                        <Precio
+                                            as="span"
+                                            className="precio"
+                                            valor={resumen.total}
+                                        />
                                     </div>
                                 </>
                             ) : (
@@ -100,12 +107,10 @@ function Success() {
                             )}
 
                             <div className="d-flex flex-column flex-sm-row justify-content-center gap-2">
-                                <Link className="btn btn-acento" to="/productos">
-                                    Seguir comprando
-                                </Link>
-                                <Link className="btn btn-outline-acento" to="/home">
+                                <Boton to="/productos">Seguir comprando</Boton>
+                                <Boton variante="outline" to="/home">
                                     Volver al inicio
-                                </Link>
+                                </Boton>
                             </div>
                         </Card>
                     </Col>

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { formatoCL, fechaHoy } from "../utils/formato";
+import Boton from "../components/Boton";
+import CampoFormulario from "../components/CampoFormulario";
+import EncabezadoPanel from "../components/EncabezadoPanel";
+import EstadoVacio from "../components/EstadoVacio";
+import Precio from "../components/Precio";
+import { fechaHoy } from "../utils/formato";
 import { calcularTotal } from "../data/carrito";
 import {
     esVacio,
@@ -9,13 +14,6 @@ import {
     reglaCorreoRequerido,
     validarLargoMax
 } from "../utils/validaciones";
-
-function claseCampo(valor, error, esSelect) {
-    const base = esSelect ? "form-select" : "form-control";
-    if (error) return base + " input-error";
-    if (valor) return base + " input-valido";
-    return base;
-}
 
 function reglaTelefono(valor) {
     if (esVacio(valor)) return null;
@@ -233,17 +231,14 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
         return (
             <main className="py-5">
                 <Container>
-                    <div className="card p-4 text-center">
-                        <h1 className="h3 mb-2">No hay productos para pagar</h1>
-                        <p className="text-secondary mb-3">
-                            Agrega productos al carrito antes de continuar con el checkout.
-                        </p>
-                        <div>
-                            <Link className="btn btn-acento" to="/productos">
-                                Ir al catálogo
-                            </Link>
-                        </div>
-                    </div>
+                    <EstadoVacio
+                        titulo="No hay productos para pagar"
+                        tituloAs="h1"
+                        tituloClassName="h3 mb-2"
+                        mensaje="Agrega productos al carrito antes de continuar con el checkout."
+                        mensajeClassName="text-secondary mb-3"
+                        accion={<Boton to="/productos">Ir al catálogo</Boton>}
+                    />
                 </Container>
             </main>
         );
@@ -252,17 +247,18 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
     return (
         <main className="py-5">
             <Container>
-                <div className="encabezado-panel mb-4">
-                    <div>
-                        <h1 className="h2 mb-1">Finalizar compra</h1>
-                        <p className="text-secondary mb-0">
-                            Completa tus datos de envío y pago para generar el pedido.
-                        </p>
-                    </div>
-                    <Link className="btn btn-outline-acento" to="/carrito">
-                        ← Volver al carrito
-                    </Link>
-                </div>
+                <EncabezadoPanel
+                    className="mb-4"
+                    titulo="Finalizar compra"
+                    tituloAs="h1"
+                    tituloClassName="h2 mb-1"
+                    subtitulo="Completa tus datos de envío y pago para generar el pedido."
+                    accion={
+                        <Boton variante="outline" to="/carrito">
+                            ← Volver al carrito
+                        </Boton>
+                    }
+                />
 
                 <form id="formCheckout" noValidate onSubmit={enviarPedido}>
                     <Row className="g-4">
@@ -272,74 +268,46 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
 
                                 <Row>
                                     <Col md={6} className="mb-3">
-                                        <label className="form-label" htmlFor="nombreCheckout">
-                                            Nombre completo
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className={claseCampo(formulario.nombre, errores.nombre)}
+                                        <CampoFormulario
+                                            label="Nombre completo"
                                             id="nombreCheckout"
                                             maxLength="100"
                                             value={formulario.nombre}
-                                            onChange={function (e) {
-                                                cambiarCampo("nombre", e.target.value);
+                                            error={errores.nombre}
+                                            onChange={function (valor) {
+                                                cambiarCampo("nombre", valor);
                                             }}
                                         />
-                                        <div
-                                            className={
-                                                "error-msj" + (errores.nombre ? " visible" : "")
-                                            }
-                                        >
-                                            {errores.nombre}
-                                        </div>
                                     </Col>
 
                                     <Col md={6} className="mb-3">
-                                        <label className="form-label" htmlFor="correoCheckout">
-                                            Correo electrónico
-                                        </label>
-                                        <input
+                                        <CampoFormulario
                                             type="email"
-                                            className={claseCampo(formulario.correo, errores.correo)}
+                                            label="Correo electrónico"
                                             id="correoCheckout"
                                             maxLength="100"
                                             value={formulario.correo}
-                                            onChange={function (e) {
-                                                cambiarCampo("correo", e.target.value);
+                                            error={errores.correo}
+                                            onChange={function (valor) {
+                                                cambiarCampo("correo", valor);
                                             }}
                                         />
-                                        <div
-                                            className={
-                                                "error-msj" + (errores.correo ? " visible" : "")
-                                            }
-                                        >
-                                            {errores.correo}
-                                        </div>
                                     </Col>
                                 </Row>
 
                                 <div className="mb-3">
-                                    <label className="form-label" htmlFor="telefonoCheckout">
-                                        Teléfono (opcional)
-                                    </label>
-                                    <input
+                                    <CampoFormulario
                                         type="tel"
-                                        className={claseCampo(formulario.telefono, errores.telefono)}
+                                        label="Teléfono (opcional)"
                                         id="telefonoCheckout"
                                         maxLength="20"
                                         placeholder="+56 9 1234 5678"
                                         value={formulario.telefono}
-                                        onChange={function (e) {
-                                            cambiarCampo("telefono", e.target.value);
+                                        error={errores.telefono}
+                                        onChange={function (valor) {
+                                            cambiarCampo("telefono", valor);
                                         }}
                                     />
-                                    <div
-                                        className={
-                                            "error-msj" + (errores.telefono ? " visible" : "")
-                                        }
-                                    >
-                                        {errores.telefono}
-                                    </div>
                                 </div>
 
                                 <h2 className="h5 mb-3 mt-4">Entrega</h2>
@@ -381,58 +349,30 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
                                 {formulario.entrega === "domicilio" ? (
                                     <Row>
                                         <Col md={7} className="mb-3">
-                                            <label className="form-label" htmlFor="direccionCheckout">
-                                                Dirección
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className={claseCampo(
-                                                    formulario.direccion,
-                                                    errores.direccion
-                                                )}
+                                            <CampoFormulario
+                                                label="Dirección"
                                                 id="direccionCheckout"
                                                 maxLength="200"
                                                 placeholder="Calle, número, departamento"
                                                 value={formulario.direccion}
-                                                onChange={function (e) {
-                                                    cambiarCampo("direccion", e.target.value);
+                                                error={errores.direccion}
+                                                onChange={function (valor) {
+                                                    cambiarCampo("direccion", valor);
                                                 }}
                                             />
-                                            <div
-                                                className={
-                                                    "error-msj" +
-                                                    (errores.direccion ? " visible" : "")
-                                                }
-                                            >
-                                                {errores.direccion}
-                                            </div>
                                         </Col>
                                         <Col md={5} className="mb-3">
-                                            <label className="form-label" htmlFor="comunaCheckout">
-                                                Comuna
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className={claseCampo(
-                                                    formulario.comuna,
-                                                    errores.comuna
-                                                )}
+                                            <CampoFormulario
+                                                label="Comuna"
                                                 id="comunaCheckout"
                                                 maxLength="100"
                                                 placeholder="Santiago"
                                                 value={formulario.comuna}
-                                                onChange={function (e) {
-                                                    cambiarCampo("comuna", e.target.value);
+                                                error={errores.comuna}
+                                                onChange={function (valor) {
+                                                    cambiarCampo("comuna", valor);
                                                 }}
                                             />
-                                            <div
-                                                className={
-                                                    "error-msj" +
-                                                    (errores.comuna ? " visible" : "")
-                                                }
-                                            >
-                                                {errores.comuna}
-                                            </div>
                                         </Col>
                                     </Row>
                                 ) : (
@@ -486,121 +426,59 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
                                 {formulario.pago === "tarjeta" ? (
                                     <>
                                         <div className="mb-3">
-                                            <label className="form-label" htmlFor="tarjetaCheckout">
-                                                Número de tarjeta
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className={claseCampo(
-                                                    formulario.tarjeta,
-                                                    errores.tarjeta
-                                                )}
+                                            <CampoFormulario
+                                                label="Número de tarjeta"
                                                 id="tarjetaCheckout"
                                                 inputMode="numeric"
                                                 maxLength="19"
                                                 placeholder="1234 5678 9012 3456"
                                                 value={formulario.tarjeta}
-                                                onChange={function (e) {
-                                                    cambiarCampo("tarjeta", e.target.value);
+                                                error={errores.tarjeta}
+                                                onChange={function (valor) {
+                                                    cambiarCampo("tarjeta", valor);
                                                 }}
                                             />
-                                            <div
-                                                className={
-                                                    "error-msj" +
-                                                    (errores.tarjeta ? " visible" : "")
-                                                }
-                                            >
-                                                {errores.tarjeta}
-                                            </div>
                                         </div>
 
                                         <Row>
                                             <Col md={6} className="mb-3">
-                                                <label className="form-label" htmlFor="titularCheckout">
-                                                    Nombre del titular
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className={claseCampo(
-                                                        formulario.titular,
-                                                        errores.titular
-                                                    )}
+                                                <CampoFormulario
+                                                    label="Nombre del titular"
                                                     id="titularCheckout"
                                                     maxLength="100"
                                                     value={formulario.titular}
-                                                    onChange={function (e) {
-                                                        cambiarCampo("titular", e.target.value);
+                                                    error={errores.titular}
+                                                    onChange={function (valor) {
+                                                        cambiarCampo("titular", valor);
                                                     }}
                                                 />
-                                                <div
-                                                    className={
-                                                        "error-msj" +
-                                                        (errores.titular ? " visible" : "")
-                                                    }
-                                                >
-                                                    {errores.titular}
-                                                </div>
                                             </Col>
                                             <Col md={3} className="mb-3">
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="vencimientoCheckout"
-                                                >
-                                                    Vencimiento
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className={claseCampo(
-                                                        formulario.vencimiento,
-                                                        errores.vencimiento
-                                                    )}
+                                                <CampoFormulario
+                                                    label="Vencimiento"
                                                     id="vencimientoCheckout"
                                                     maxLength="5"
                                                     placeholder="MM/AA"
                                                     value={formulario.vencimiento}
-                                                    onChange={function (e) {
-                                                        cambiarCampo(
-                                                            "vencimiento",
-                                                            e.target.value
-                                                        );
+                                                    error={errores.vencimiento}
+                                                    onChange={function (valor) {
+                                                        cambiarCampo("vencimiento", valor);
                                                     }}
                                                 />
-                                                <div
-                                                    className={
-                                                        "error-msj" +
-                                                        (errores.vencimiento ? " visible" : "")
-                                                    }
-                                                >
-                                                    {errores.vencimiento}
-                                                </div>
                                             </Col>
                                             <Col md={3} className="mb-3">
-                                                <label className="form-label" htmlFor="cvvCheckout">
-                                                    CVV
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    className={claseCampo(
-                                                        formulario.cvv,
-                                                        errores.cvv
-                                                    )}
+                                                <CampoFormulario
+                                                    label="CVV"
                                                     id="cvvCheckout"
                                                     inputMode="numeric"
                                                     maxLength="4"
                                                     placeholder="123"
                                                     value={formulario.cvv}
-                                                    onChange={function (e) {
-                                                        cambiarCampo("cvv", e.target.value);
+                                                    error={errores.cvv}
+                                                    onChange={function (valor) {
+                                                        cambiarCampo("cvv", valor);
                                                     }}
                                                 />
-                                                <div
-                                                    className={
-                                                        "error-msj" +
-                                                        (errores.cvv ? " visible" : "")
-                                                    }
-                                                >
-                                                    {errores.cvv}
-                                                </div>
                                             </Col>
                                         </Row>
 
@@ -634,10 +512,10 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
                                                     {item.nombre}
                                                     <small className="text-secondary d-block">
                                                         {item.cantidad} ×{" "}
-                                                        {formatoCL(item.precioUnitario)}
+                                                        <Precio valor={item.precioUnitario} />
                                                     </small>
                                                 </span>
-                                                <strong>{formatoCL(item.subtotal)}</strong>
+                                                <Precio as="strong" valor={item.subtotal} />
                                             </li>
                                         );
                                     })}
@@ -645,23 +523,25 @@ function Checkout({ sesion, carrito, productos, registrarCompra, vaciarCarrito }
 
                                 <div className="d-flex justify-content-between mb-1">
                                     <span className="text-secondary">Subtotal</span>
-                                    <span>{formatoCL(subtotal)}</span>
+                                    <Precio valor={subtotal} />
                                 </div>
                                 <div className="d-flex justify-content-between mb-2">
                                     <span className="text-secondary">Envío</span>
-                                    <span>
-                                        {costoEnvio === 0 ? "Gratis" : formatoCL(costoEnvio)}
-                                    </span>
+                                    {costoEnvio === 0 ? (
+                                        <span>Gratis</span>
+                                    ) : (
+                                        <Precio valor={costoEnvio} />
+                                    )}
                                 </div>
                                 <hr />
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <span className="fs-5">Total</span>
-                                    <span className="precio">{formatoCL(total)}</span>
+                                    <Precio className="precio" valor={total} />
                                 </div>
 
-                                <button type="submit" className="btn btn-acento w-100 btn-lg">
+                                <Boton type="submit" variante="acento" bloque tamano="lg">
                                     Confirmar y pagar
-                                </button>
+                                </Boton>
                                 <p className="text-secondary small mt-3 mb-0">
                                     Al confirmar aceptas los términos de la compra de
                                     demostración. No se realizará ningún cobro real.

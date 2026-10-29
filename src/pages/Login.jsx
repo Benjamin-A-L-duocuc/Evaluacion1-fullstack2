@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Boton from "../components/Boton";
+import CampoFormulario from "../components/CampoFormulario";
 import {
     validarRequerido,
     validarLargoMax,
@@ -8,12 +10,6 @@ import {
     reglaCorreoRequerido,
     reglaNombre
 } from "../utils/validaciones";
-
-function claseCampo(valor, error) {
-    if (error) return "form-control input-error";
-    if (valor) return "form-control input-valido";
-    return "form-control";
-}
 
 function Login({ iniciarSesion }) {
     const navegar = useNavigate();
@@ -190,52 +186,42 @@ function Login({ iniciarSesion }) {
 
                         <form id="formLogin" noValidate onSubmit={enviarLogin}>
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="correoLogin">
-                                    Correo electrónico
-                                </label>
-                                <input
+                                <CampoFormulario
                                     type="email"
-                                    className={claseCampo(login.correo, erroresLogin.correo)}
+                                    label="Correo electrónico"
                                     id="correoLogin"
                                     name="correoLogin"
                                     placeholder="tucorreo@duoc.cl"
                                     maxLength="100"
                                     value={login.correo}
-                                    onChange={function (e) { cambiarLogin("correo", e.target.value); }}
+                                    error={erroresLogin.correo}
+                                    errorId="errorCorreoLogin"
+                                    onChange={function (valor) {
+                                        cambiarLogin("correo", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresLogin.correo ? " visible" : "")}
-                                    id="errorCorreoLogin"
-                                >
-                                    {erroresLogin.correo}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="claveLogin">
-                                    Contraseña
-                                </label>
-                                <input
+                                <CampoFormulario
                                     type="password"
-                                    className={claseCampo(login.clave, erroresLogin.clave)}
+                                    label="Contraseña"
                                     id="claveLogin"
                                     name="claveLogin"
                                     placeholder="••••••"
                                     maxLength="10"
                                     value={login.clave}
-                                    onChange={function (e) { cambiarLogin("clave", e.target.value); }}
+                                    error={erroresLogin.clave}
+                                    errorId="errorClaveLogin"
+                                    onChange={function (valor) {
+                                        cambiarLogin("clave", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresLogin.clave ? " visible" : "")}
-                                    id="errorClaveLogin"
-                                >
-                                    {erroresLogin.clave}
-                                </div>
                             </div>
 
-                            <button type="submit" className="btn btn-acento w-100">
+                            <Boton type="submit" variante="acento" bloque>
                                 Ingresar
-                            </button>
+                            </Boton>
                         </form>
                     </div>
 
@@ -247,135 +233,102 @@ function Login({ iniciarSesion }) {
                     >
                         <form id="formRegistro" noValidate onSubmit={enviarRegistro}>
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="nombreRegistro">
-                                    Nombre completo
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(registro.nombre, erroresRegistro.nombre)}
+                                <CampoFormulario
+                                    label="Nombre completo"
                                     id="nombreRegistro"
                                     name="nombreRegistro"
                                     placeholder="Tu nombre y apellido"
                                     maxLength="100"
                                     value={registro.nombre}
-                                    onChange={function (e) { cambiarRegistro("nombre", e.target.value); }}
+                                    error={erroresRegistro.nombre}
+                                    errorId="errorNombreRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("nombre", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.nombre ? " visible" : "")}
-                                    id="errorNombreRegistro"
-                                >
-                                    {erroresRegistro.nombre}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="rutRegistro">
-                                    RUT
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(registro.rut, erroresRegistro.rut)}
+                                <CampoFormulario
+                                    label="RUT"
                                     id="rutRegistro"
                                     name="rutRegistro"
                                     placeholder="12.345.678-5"
                                     maxLength="12"
                                     value={registro.rut}
-                                    onChange={function (e) { cambiarRegistro("rut", e.target.value); }}
+                                    error={erroresRegistro.rut}
+                                    errorId="errorRutRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("rut", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.rut ? " visible" : "")}
-                                    id="errorRutRegistro"
-                                >
-                                    {erroresRegistro.rut}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="correoRegistro">
-                                    Correo electrónico
-                                </label>
-                                <input
+                                <CampoFormulario
                                     type="email"
-                                    className={claseCampo(registro.correo, erroresRegistro.correo)}
+                                    label="Correo electrónico"
                                     id="correoRegistro"
                                     name="correoRegistro"
                                     placeholder="tucorreo@duoc.cl"
                                     maxLength="100"
                                     value={registro.correo}
-                                    onChange={function (e) { cambiarRegistro("correo", e.target.value); }}
+                                    error={erroresRegistro.correo}
+                                    errorId="errorCorreoRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("correo", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.correo ? " visible" : "")}
-                                    id="errorCorreoRegistro"
-                                >
-                                    {erroresRegistro.correo}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="claveRegistro">
-                                    Contraseña
-                                </label>
-                                <input
+                                <CampoFormulario
                                     type="password"
-                                    className={claseCampo(registro.clave, erroresRegistro.clave)}
+                                    label="Contraseña"
                                     id="claveRegistro"
                                     name="claveRegistro"
                                     placeholder="••••••"
                                     maxLength="10"
                                     value={registro.clave}
-                                    onChange={function (e) { cambiarRegistro("clave", e.target.value); }}
+                                    error={erroresRegistro.clave}
+                                    errorId="errorClaveRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("clave", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.clave ? " visible" : "")}
-                                    id="errorClaveRegistro"
-                                >
-                                    {erroresRegistro.clave}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="claveConfirmarRegistro">
-                                    Confirmar contraseña
-                                </label>
-                                <input
+                                <CampoFormulario
                                     type="password"
-                                    className={claseCampo(registro.claveConfirmar, erroresRegistro.claveConfirmar)}
+                                    label="Confirmar contraseña"
                                     id="claveConfirmarRegistro"
                                     name="claveConfirmarRegistro"
                                     placeholder="••••••"
                                     maxLength="10"
                                     value={registro.claveConfirmar}
-                                    onChange={function (e) { cambiarRegistro("claveConfirmar", e.target.value); }}
+                                    error={erroresRegistro.claveConfirmar}
+                                    errorId="errorClaveConfirmarRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("claveConfirmar", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.claveConfirmar ? " visible" : "")}
-                                    id="errorClaveConfirmarRegistro"
-                                >
-                                    {erroresRegistro.claveConfirmar}
-                                </div>
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label" htmlFor="direccionRegistro">
-                                    Dirección
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(registro.direccion, erroresRegistro.direccion)}
+                                <CampoFormulario
+                                    label="Dirección"
                                     id="direccionRegistro"
                                     name="direccionRegistro"
                                     placeholder="Calle, número, comuna"
                                     maxLength="200"
                                     value={registro.direccion}
-                                    onChange={function (e) { cambiarRegistro("direccion", e.target.value); }}
+                                    error={erroresRegistro.direccion}
+                                    errorId="errorDireccionRegistro"
+                                    onChange={function (valor) {
+                                        cambiarRegistro("direccion", valor);
+                                    }}
                                 />
-                                <div
-                                    className={"error-msj" + (erroresRegistro.direccion ? " visible" : "")}
-                                    id="errorDireccionRegistro"
-                                >
-                                    {erroresRegistro.direccion}
-                                </div>
                             </div>
 
                             <div
@@ -385,9 +338,9 @@ function Login({ iniciarSesion }) {
                                 {avisoRegistro}
                             </div>
 
-                            <button type="submit" className="btn btn-acento w-100">
+                            <Boton type="submit" variante="acento" bloque>
                                 Crear cuenta
-                            </button>
+                            </Boton>
                             <p className="text-secondary small mt-2 mb-0 text-center">
                                 Demostración visual: el registro valida los datos, pero la cuenta no se
                                 crea en esta entrega.

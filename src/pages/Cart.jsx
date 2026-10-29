@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Container, Table } from "react-bootstrap";
+import Boton from "../components/Boton";
+import EncabezadoPanel from "../components/EncabezadoPanel";
+import EstadoVacio from "../components/EstadoVacio";
+import Precio from "../components/Precio";
 import QuantityStepper from "../components/QuantityStepper";
-import { formatoCL } from "../utils/formato";
 import { calcularTotal } from "../data/carrito";
 
 function Cart({ carrito, productos, onCantidad, onQuitar, onVaciar }) {
@@ -43,7 +45,11 @@ function Cart({ carrito, productos, onCantidad, onQuitar, onVaciar }) {
                         {producto.categoria} · Código {producto.codigo}
                     </small>
                 </td>
-                <td className="clave-precio">{formatoCL(item.precioUnitario)}</td>
+                <Precio
+                    as="td"
+                    className="clave-precio"
+                    valor={item.precioUnitario}
+                />
                 <td>
                     <QuantityStepper
                         valor={item.cantidad}
@@ -54,18 +60,23 @@ function Cart({ carrito, productos, onCantidad, onQuitar, onVaciar }) {
                         className="cantidad-stepper-cart"
                     />
                 </td>
-                <td className="clave-precio">
-                    {formatoCL(item.cantidad * item.precioUnitario)}
-                </td>
+                <Precio
+                    as="td"
+                    className="clave-precio"
+                    valor={item.cantidad * item.precioUnitario}
+                />
                 <td>
-                    <button
+                    <Boton
                         type="button"
-                        className="btn btn-sm btn-outline-acento"
+                        variante="outline"
+                        tamano="sm"
                         title="Quitar este producto del carrito"
-                        onClick={function () { onQuitar(indice); }}
+                        onClick={function () {
+                            onQuitar(indice);
+                        }}
                     >
                         🗑 Quitar
-                    </button>
+                    </Boton>
                 </td>
             </tr>
         );
@@ -74,25 +85,25 @@ function Cart({ carrito, productos, onCantidad, onQuitar, onVaciar }) {
     return (
         <main className="py-5">
             <Container>
-                <div className="encabezado-panel mb-4">
-                    <h1 className="h2 mb-0">Tu carrito de compras</h1>
-                    <Link className="btn btn-outline-acento" to="/productos">
-                        ← Seguir comprando
-                    </Link>
-                </div>
+                <EncabezadoPanel
+                    className="mb-4"
+                    titulo="Tu carrito de compras"
+                    tituloAs="h1"
+                    tituloClassName="h2 mb-0"
+                    accion={
+                        <Boton variante="outline" to="/productos">
+                            ← Seguir comprando
+                        </Boton>
+                    }
+                />
 
                 {carrito.length === 0 ? (
-                    <div className="card p-4 text-center">
-                        <p className="mb-1">Tu carrito está vacío.</p>
-                        <p className="text-secondary small mb-3">
-                            Agrega productos desde el catálogo para continuar.
-                        </p>
-                        <div>
-                            <Link className="btn btn-acento" to="/productos">
-                                Ir al catálogo
-                            </Link>
-                        </div>
-                    </div>
+                    <EstadoVacio
+                        titulo="Tu carrito está vacío."
+                        mensaje="Agrega productos desde el catálogo para continuar."
+                        mensajeClassName="text-secondary small mb-3"
+                        accion={<Boton to="/productos">Ir al catálogo</Boton>}
+                    />
                 ) : (
                     <>
                         <div className="table-responsive">
@@ -113,19 +124,19 @@ function Cart({ carrito, productos, onCantidad, onQuitar, onVaciar }) {
 
                         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mt-4 gap-3">
                             <p className="mb-0 fs-4">
-                                Total: <span className="precio">{formatoCL(total)}</span>
+                                <Precio as="span" className="precio" valor={total}>
+                                    Total:{" "}
+                                </Precio>
                             </p>
                             <div className="d-flex gap-2">
-                                <button
+                                <Boton
                                     type="button"
-                                    className="btn btn-outline-acento"
+                                    variante="outline"
                                     onClick={onVaciar}
                                 >
                                     Vaciar carrito
-                                </button>
-                                <Link to="/checkout" className="btn btn-acento">
-                                    Finalizar compra
-                                </Link>
+                                </Boton>
+                                <Boton to="/checkout">Finalizar compra</Boton>
                             </div>
                         </div>
 

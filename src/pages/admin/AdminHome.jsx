@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Card, Row, Col } from "react-bootstrap";
+import Boton from "../../components/Boton";
+import EncabezadoPanel from "../../components/EncabezadoPanel";
+import Precio from "../../components/Precio";
 import SummaryCard from "../../components/SummaryCard";
-import { formatoCL } from "../../utils/formato";
 
 function AdminHome({ productos, ventas }) {
     const categorias = productos.reduce(function (lista, producto) {
@@ -54,36 +55,37 @@ function AdminHome({ productos, ventas }) {
             </Row>
 
             <Card className="p-4 mb-4">
-                <div className="encabezado-panel">
-                    <div>
-                        <h2 className="h5 mb-1">Gestión de productos</h2>
-                        <p className="text-secondary small mb-0">
-                            Administra los productos disponibles en tu sitio: agrega, edita o
-                            elimina artículos del catálogo.
-                        </p>
-                    </div>
-                    <Link className="btn btn-acento" to="/admin/productos">
-                        Ir a gestión
-                    </Link>
-                </div>
+                <EncabezadoPanel
+                    titulo="Gestión de productos"
+                    tituloAs="h2"
+                    tituloClassName="h5 mb-1"
+                    subtitulo="Administra los productos disponibles en tu sitio: agrega, edita o elimina artículos del catálogo."
+                    subtituloClassName="text-secondary small mb-0"
+                    accion={
+                        <Boton to="/admin/productos">Ir a gestión</Boton>
+                    }
+                />
             </Card>
 
             <Card className="p-4 mb-4">
-                <div className="encabezado-panel">
-                    <div>
-                        <h2 className="h5 mb-1">Compras realizadas</h2>
-                        <p className="text-secondary small mb-0">
-                            Consulta el historial de ventas y los pedidos de los clientes.
-                        </p>
-                        <p className="text-secondary small mb-0 mt-2">
-                            {ventas.length} ventas registradas · {formatoCL(totalRecaudado)}{" "}
-                            recaudados · {enTransito} pedidos en tránsito.
-                        </p>
-                    </div>
-                    <Link className="btn btn-outline-acento" to="/admin/ventas">
-                        Ver ventas
-                    </Link>
-                </div>
+                <EncabezadoPanel
+                    titulo="Compras realizadas"
+                    tituloAs="h2"
+                    tituloClassName="h5 mb-1"
+                    subtitulo="Consulta el historial de ventas y los pedidos de los clientes."
+                    subtituloClassName="text-secondary small mb-0"
+                    accion={
+                        <Boton variante="outline" to="/admin/ventas">
+                            Ver ventas
+                        </Boton>
+                    }
+                >
+                    <p className="text-secondary small mb-0 mt-2">
+                        {ventas.length} ventas registradas ·{" "}
+                        <Precio valor={totalRecaudado} /> recaudados · {enTransito}{" "}
+                        pedidos en tránsito.
+                    </p>
+                </EncabezadoPanel>
             </Card>
 
             {criticos.length > 0 ? (

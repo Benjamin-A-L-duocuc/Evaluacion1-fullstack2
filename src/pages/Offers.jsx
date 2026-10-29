@@ -1,6 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import Boton from "../components/Boton";
+import EncabezadoPanel from "../components/EncabezadoPanel";
+import EstadoVacio from "../components/EstadoVacio";
+import HeroSeccion from "../components/HeroSeccion";
 import ProductCard from "../components/ProductCard";
 
 function Offers({ productos, onAgregar }) {
@@ -10,37 +13,33 @@ function Offers({ productos, onAgregar }) {
 
     return (
         <>
-            <header className="hero py-5">
-                <Container>
-                    <span className="badge badge-marca mb-3">Precios especiales</span>
-                    <h1 className="display-5 fw-bold mb-2">Ofertas de la temporada</h1>
-                    <p className="lead mb-0">
-                        Aprovecha descuentos en productos seleccionados mientras dure el stock.
-                    </p>
-                </Container>
-            </header>
+            <HeroSeccion
+                badge="Precios especiales"
+                titulo="Ofertas de la temporada"
+                subtitulo="Aprovecha descuentos en productos seleccionados mientras dure el stock."
+            />
 
             <main className="py-5">
                 <Container>
-                    <div className="encabezado-panel mb-4">
-                        <div>
-                            <h2 className="mb-1">Productos en oferta</h2>
-                            <p className="text-secondary mb-0">
-                                {ofertas.length} productos con descuento.
-                            </p>
-                        </div>
-                        <Link className="btn btn-outline-acento" to="/productos">
-                            Ver catálogo completo
-                        </Link>
-                    </div>
+                    <EncabezadoPanel
+                        className="mb-4"
+                        titulo="Productos en oferta"
+                        tituloAs="h2"
+                        tituloClassName="mb-1"
+                        subtitulo={ofertas.length + " productos con descuento."}
+                        accion={
+                            <Boton variante="outline" to="/productos">
+                                Ver catálogo completo
+                            </Boton>
+                        }
+                    />
 
                     {ofertas.length === 0 ? (
-                        <div className="card p-4 text-center">
-                            <p className="mb-1">No hay ofertas disponibles por el momento.</p>
-                            <p className="text-secondary small mb-0">
-                                Vuelve pronto para revisar nuevas promociones.
-                            </p>
-                        </div>
+                        <EstadoVacio
+                            titulo="No hay ofertas disponibles por el momento."
+                            tituloClassName="mb-1"
+                            mensaje="Vuelve pronto para revisar nuevas promociones."
+                        />
                     ) : (
                         <Row className="justify-content-center g-4">
                             {ofertas.map(function (producto) {

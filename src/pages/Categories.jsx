@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import Boton from "../components/Boton";
+import EncabezadoPanel from "../components/EncabezadoPanel";
+import HeroSeccion from "../components/HeroSeccion";
 import ProductCard from "../components/ProductCard";
 
 const IMAGENES_CATEGORIA = {
@@ -17,14 +20,10 @@ function Categories({ productos, onAgregar }) {
 
     return (
         <>
-            <header className="hero py-5">
-                <Container>
-                    <h1 className="display-5 fw-bold mb-2">Categorías</h1>
-                    <p className="lead mb-0">
-                        Encuentra más rápido el equipamiento que necesitas.
-                    </p>
-                </Container>
-            </header>
+            <HeroSeccion
+                titulo="Categorías"
+                subtitulo="Encuentra más rápido el equipamiento que necesitas."
+            />
 
             <main className="py-5">
                 <Container>
@@ -63,20 +62,24 @@ function Categories({ productos, onAgregar }) {
 
                         return (
                             <section className="mb-5" key={categoria}>
-                                <div className="encabezado-panel mb-3">
-                                    <div>
-                                        <h2 className="mb-1">{categoria}</h2>
-                                        <p className="text-secondary mb-0">
-                                            {productosCategoria.length} productos disponibles.
-                                        </p>
-                                    </div>
-                                    <Link
-                                        className="btn btn-outline-acento btn-sm"
-                                        to={"/productos?categoria=" + categoria}
-                                    >
-                                        Ver en catálogo
-                                    </Link>
-                                </div>
+                                <EncabezadoPanel
+                                    className="mb-3"
+                                    titulo={categoria}
+                                    tituloAs="h2"
+                                    tituloClassName="mb-1"
+                                    subtitulo={
+                                        productosCategoria.length + " productos disponibles."
+                                    }
+                                    accion={
+                                        <Boton
+                                            variante="outline"
+                                            tamano="sm"
+                                            to={"/productos?categoria=" + categoria}
+                                        >
+                                            Ver en catálogo
+                                        </Boton>
+                                    }
+                                />
 
                                 <Row className="g-4">
                                     {productosCategoria.map(function (producto) {

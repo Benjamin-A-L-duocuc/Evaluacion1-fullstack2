@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import Boton from "../components/Boton";
+import EncabezadoPanel from "../components/EncabezadoPanel";
 import ProductCard from "../components/ProductCard";
 
 function Home({ productos, onAgregar }) {
@@ -32,12 +34,12 @@ function Home({ productos, onAgregar }) {
                                 con envío a todo Chile.
                             </p>
                             <div className="d-flex flex-column flex-sm-row gap-2">
-                                <Link to="/productos" className="btn btn-acento btn-lg">
+                                <Boton to="/productos" tamano="lg">
                                     Comprar ahora
-                                </Link>
-                                <Link to="/nosotros" className="btn btn-outline-acento btn-lg">
+                                </Boton>
+                                <Boton to="/nosotros" variante="outline" tamano="lg">
                                     Conócenos
-                                </Link>
+                                </Boton>
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -84,17 +86,18 @@ function Home({ productos, onAgregar }) {
 
             <main className="py-5">
                 <Container>
-                    <div className="encabezado-panel mb-4">
-                        <div>
-                            <h2 className="mb-1">Productos destacados</h2>
-                            <p className="text-secondary mb-0">
-                                Lo más vendido de la temporada.
-                            </p>
-                        </div>
-                        <Link className="btn btn-outline-acento" to="/productos">
-                            Ver todos
-                        </Link>
-                    </div>
+                    <EncabezadoPanel
+                        className="mb-4"
+                        titulo="Productos destacados"
+                        tituloAs="h2"
+                        tituloClassName="mb-1"
+                        subtitulo="Lo más vendido de la temporada."
+                        accion={
+                            <Boton variante="outline" to="/productos">
+                                Ver todos
+                            </Boton>
+                        }
+                    />
 
                     <Row className="justify-content-center g-4">
                         {destacados.map(function (producto) {
@@ -167,9 +170,9 @@ function Home({ productos, onAgregar }) {
                                 />
                             </div>
                             <div className="col-md-auto">
-                                <button type="submit" className="btn btn-acento px-4">
+                                <Boton type="submit" className="px-4">
                                     Suscribirme
-                                </button>
+                                </Boton>
                             </div>
                         </form>
                         {avisoNewsletter ? (

@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Container, Row, Col, Card, Badge } from "react-bootstrap";
-import { formatoCL } from "../utils/formato";
+import Boton from "../components/Boton";
+import Precio from "../components/Precio";
 
 function Failure() {
     const ubicacion = useLocation();
@@ -32,9 +33,11 @@ function Failure() {
                                     </div>
                                     <div className="d-flex justify-content-between">
                                         <span className="text-secondary">Total del pedido</span>
-                                        <span className="clave-precio">
-                                            {formatoCL(datos.total)}
-                                        </span>
+                                        <Precio
+                                            as="span"
+                                            className="clave-precio"
+                                            valor={datos.total}
+                                        />
                                     </div>
                                 </div>
                             ) : null}
@@ -46,15 +49,13 @@ function Failure() {
                             </p>
 
                             <div className="d-flex flex-column flex-sm-row justify-content-center gap-2">
-                                <Link className="btn btn-acento" to="/checkout">
-                                    Reintentar pago
-                                </Link>
-                                <Link className="btn btn-outline-acento" to="/carrito">
+                                <Boton to="/checkout">Reintentar pago</Boton>
+                                <Boton variante="outline" to="/carrito">
                                     Revisar carrito
-                                </Link>
-                                <Link className="btn btn-outline-acento" to="/contacto">
+                                </Boton>
+                                <Boton variante="outline" to="/contacto">
                                     Contactarnos
-                                </Link>
+                                </Boton>
                             </div>
                         </Card>
                     </Col>

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Card, Table } from "react-bootstrap";
 import AlertMessage from "../../components/AlertMessage";
-import { formatoCL } from "../../utils/formato";
+import Boton from "../../components/Boton";
+import EncabezadoPanel from "../../components/EncabezadoPanel";
+import EstadoVacio from "../../components/EstadoVacio";
+import Precio from "../../components/Precio";
+import SummaryCard from "../../components/SummaryCard";
 import {
     actualizarVenta,
     eliminarVenta,
@@ -47,38 +51,33 @@ function AdminSales({ ventas, recargarVentas }) {
 
     return (
         <>
-            <div className="encabezado-panel mb-4">
-                <div>
-                    <h1 className="h3 mb-1">Compras realizadas</h1>
-                    <p className="text-secondary mb-0">
-                        Consulta el historial de ventas de la tienda.
-                    </p>
-                </div>
-                <button type="button" className="btn btn-outline-acento" onClick={restaurar}>
-                    Restaurar historial
-                </button>
-            </div>
+            <EncabezadoPanel
+                className="mb-4"
+                titulo="Compras realizadas"
+                tituloAs="h1"
+                tituloClassName="h3 mb-1"
+                subtitulo="Consulta el historial de ventas de la tienda."
+                accion={
+                    <Boton type="button" variante="outline" onClick={restaurar}>
+                        Restaurar historial
+                    </Boton>
+                }
+            />
 
             <AlertMessage show={Boolean(aviso)}>{aviso}</AlertMessage>
 
             <div className="row g-3 mb-4">
                 <div className="col-md-4">
-                    <div className="tabla-resumen">
-                        <p className="numero mb-1">{ventas.length}</p>
-                        <p className="etiqueta mb-0">Ventas registradas</p>
-                    </div>
+                    <SummaryCard numero={ventas.length} etiqueta="Ventas registradas" />
                 </div>
                 <div className="col-md-4">
-                    <div className="tabla-resumen">
-                        <p className="numero mb-1">{formatoCL(totalRecaudado)}</p>
-                        <p className="etiqueta mb-0">Total recaudado</p>
-                    </div>
+                    <SummaryCard
+                        numero={<Precio valor={totalRecaudado} />}
+                        etiqueta="Total recaudado"
+                    />
                 </div>
                 <div className="col-md-4">
-                    <div className="tabla-resumen">
-                        <p className="numero mb-1">{enTransito}</p>
-                        <p className="etiqueta mb-0">Pedidos en tránsito</p>
-                    </div>
+                    <SummaryCard numero={enTransito} etiqueta="Pedidos en tránsito" />
                 </div>
             </div>
 
@@ -113,9 +112,11 @@ function AdminSales({ ventas, recargarVentas }) {
                                         <td>{venta.cliente}</td>
                                         <td>{venta.producto}</td>
                                         <td>{venta.cantidad}</td>
-                                        <td className="clave-precio">
-                                            {formatoCL(venta.total)}
-                                        </td>
+                                        <Precio
+                                            as="td"
+                                            className="clave-precio"
+                                            valor={venta.total}
+                                        />
                                         <td>
                                             <select
                                                 className="form-select form-select-sm"
@@ -134,14 +135,17 @@ function AdminSales({ ventas, recargarVentas }) {
                                             </select>
                                         </td>
                                         <td>
-                                            <button
+                                            <Boton
                                                 type="button"
-                                                className="btn btn-sm btn-outline-acento"
+                                                variante="outline"
+                                                tamano="sm"
                                                 title="Eliminar registro"
-                                                onClick={function () { eliminar(venta.id); }}
+                                                onClick={function () {
+                                                    eliminar(venta.id);
+                                                }}
                                             >
                                                 🗑️
-                                            </button>
+                                            </Boton>
                                         </td>
                                     </tr>
                                 );
@@ -151,10 +155,10 @@ function AdminSales({ ventas, recargarVentas }) {
                 </div>
 
                 {ventas.length === 0 ? (
-                    <p className="text-secondary small mb-0">
-                        No hay ventas registradas. Puedes restaurar el historial de
-                        demostración.
-                    </p>
+                    <EstadoVacio
+                        variante="texto"
+                        mensaje="No hay ventas registradas. Puedes restaurar el historial de demostración."
+                    />
                 ) : null}
             </Card>
         </>

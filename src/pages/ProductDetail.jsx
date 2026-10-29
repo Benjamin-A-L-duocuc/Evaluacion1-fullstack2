@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Carousel, Container, Row, Col, Badge } from "react-bootstrap";
+import Boton from "../components/Boton";
+import EncabezadoPanel from "../components/EncabezadoPanel";
+import EstadoVacio from "../components/EstadoVacio";
+import Precio from "../components/Precio";
 import QuantityStepper from "../components/QuantityStepper";
 import ProductCard from "../components/ProductCard";
-import { formatoCL } from "../utils/formato";
 
 function ProductDetail({ productos, onAgregar }) {
     const parametros = useParams();
@@ -20,15 +23,14 @@ function ProductDetail({ productos, onAgregar }) {
         return (
             <main className="py-5">
                 <Container>
-                    <div className="card p-4 text-center">
-                        <h1 className="h3 mb-2">Producto no encontrado</h1>
-                        <p className="text-secondary mb-3">
-                            El producto que buscas no existe o fue eliminado.
-                        </p>
-                        <Link to="/productos" className="btn btn-acento">
-                            Volver al catálogo
-                        </Link>
-                    </div>
+                    <EstadoVacio
+                        titulo="Producto no encontrado"
+                        tituloAs="h1"
+                        tituloClassName="h3 mb-2"
+                        mensaje="El producto que buscas no existe o fue eliminado."
+                        mensajeClassName="text-secondary mb-3"
+                        accion={<Boton to="/productos">Volver al catálogo</Boton>}
+                    />
                 </Container>
             </main>
         );
@@ -98,7 +100,7 @@ function ProductDetail({ productos, onAgregar }) {
                                 {producto.rating} · {producto.resenas} reseñas
                             </span>
                         </p>
-                        <p className="precio mb-3">{formatoCL(producto.precio)}</p>
+                        <Precio as="p" className="precio mb-3" valor={producto.precio} />
 
                         <p className="text-secondary">{producto.descripcion}</p>
 
@@ -139,27 +141,35 @@ function ProductDetail({ productos, onAgregar }) {
                                     onCambiar={setCantidad}
                                     maximo={producto.stock}
                                 />
-                                <p className="precio-total mb-0">
-                                    Total: {formatoCL(producto.precio * cantidad)}
-                                </p>
+                                <Precio
+                                    as="p"
+                                    className="precio-total mb-0"
+                                    valor={producto.precio * cantidad}
+                                >
+                                    Total:{" "}
+                                </Precio>
                             </div>
                         </div>
 
                         <div className="d-flex flex-column flex-sm-row gap-2 mb-3">
-                            <button
+                            <Boton
                                 type="button"
-                                className="btn btn-acento flex-fill btn-lg"
+                                variante="acento"
+                                tamano="lg"
+                                className="flex-fill"
                                 onClick={manejarAgregar}
                             >
                                 {agregado ? "✓ Añadido al carrito" : "Añadir al carrito"}
-                            </button>
-                            <button
+                            </Boton>
+                            <Boton
                                 type="button"
-                                className="btn btn-outline-acento flex-fill btn-lg"
+                                variante="outline"
+                                tamano="lg"
+                                className="flex-fill"
                                 onClick={comprarAhora}
                             >
                                 Comprar ahora
-                            </button>
+                            </Boton>
                         </div>
 
                         <p className="text-secondary small mb-0">
@@ -248,15 +258,17 @@ function ProductDetail({ productos, onAgregar }) {
 
                 {relacionado ? (
                     <section className="detalle-seccion">
-                        <div className="encabezado-panel mb-3">
-                            <h2 className="mb-0">También te puede interesar</h2>
-                            <Link
-                                className="btn btn-outline-acento btn-sm"
-                                to="/productos"
-                            >
-                                Ver todos
-                            </Link>
-                        </div>
+                        <EncabezadoPanel
+                            className="mb-3"
+                            titulo="También te puede interesar"
+                            tituloAs="h2"
+                            tituloClassName="mb-0"
+                            accion={
+                                <Boton variante="outline" tamano="sm" to="/productos">
+                                    Ver todos
+                                </Boton>
+                            }
+                        />
                         <Row className="g-4">
                             <Col md={5}>
                                 <ProductCard

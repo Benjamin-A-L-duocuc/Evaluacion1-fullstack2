@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Card, Badge } from "react-bootstrap";
-import { formatoCL } from "../utils/formato";
+import Boton from "./Boton";
+import Precio from "./Precio";
 
 function ProductCard({
     producto,
@@ -40,28 +40,33 @@ function ProductCard({
                     </p>
                 ) : null}
 
-                {usarOferta && producto.precioOferta ? (
-                    <p className="text-secondary small mb-1">
-                        <s>{formatoCL(producto.precio)}</s>
-                        <Badge className="badge-stock ms-2">Oferta</Badge>
-                    </p>
-                ) : null}
-
-                <p className="precio mb-3">{formatoCL(precio)}</p>
+                <Precio
+                    as="p"
+                    className="precio mb-3"
+                    valor={precio}
+                    anterior={
+                        usarOferta && producto.precioOferta
+                            ? producto.precio
+                            : undefined
+                    }
+                    oferta={Boolean(usarOferta && producto.precioOferta)}
+                />
                 <div className="d-flex gap-2 flex-wrap">
-                    <Link
+                    <Boton
                         to={"/productos/" + producto.id}
-                        className="btn btn-acento flex-fill"
+                        variante="acento"
+                        className="flex-fill"
                     >
                         Ver detalle
-                    </Link>
-                    <button
+                    </Boton>
+                    <Boton
                         type="button"
-                        className="btn btn-outline-acento flex-fill"
+                        variante="outline"
+                        className="flex-fill"
                         onClick={manejarAgregar}
                     >
                         {agregado ? "✓ Añadido" : "Añadir"}
-                    </button>
+                    </Boton>
                 </div>
             </Card.Body>
         </Card>

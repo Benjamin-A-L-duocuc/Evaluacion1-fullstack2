@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import Boton from "../components/Boton";
+import CampoFormulario from "../components/CampoFormulario";
 import {
     esVacio,
     validarRequerido,
     validarLargoMax,
     validarCorreoDominio
 } from "../utils/validaciones";
-
-function claseCampo(valor, error) {
-    if (error) return "form-control input-error";
-    if (valor) return "form-control input-valido";
-    return "form-control";
-}
 
 function reglaNombreContacto(valor) {
     if (!validarRequerido(valor)) return "El nombre es requerido.";
@@ -95,80 +91,53 @@ function Contact() {
                         <Card className="p-4">
                             <form id="formContacto" noValidate onSubmit={enviarFormulario}>
                                 <div className="mb-3">
-                                    <label htmlFor="nombreContacto" className="form-label">
-                                        Nombre
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className={claseCampo(formulario.nombre, errores.nombre)}
+                                    <CampoFormulario
+                                        label="Nombre"
                                         id="nombreContacto"
                                         maxLength="100"
                                         placeholder="Tu nombre"
                                         value={formulario.nombre}
-                                        onChange={function (e) {
-                                            cambiarCampo("nombre", e.target.value);
+                                        error={errores.nombre}
+                                        errorId="errorNombreContacto"
+                                        onChange={function (valor) {
+                                            cambiarCampo("nombre", valor);
                                         }}
                                     />
-                                    <div
-                                        className={"error-msj" + (errores.nombre ? " visible" : "")}
-                                        id="errorNombreContacto"
-                                    >
-                                        {errores.nombre}
-                                    </div>
                                 </div>
 
                                 <div className="mb-3">
-                                    <label htmlFor="correoContacto" className="form-label">
-                                        Correo electrónico
-                                    </label>
-                                    <input
+                                    <CampoFormulario
                                         type="email"
-                                        className={claseCampo(formulario.correo, errores.correo)}
+                                        label="Correo electrónico"
                                         id="correoContacto"
                                         maxLength="100"
                                         placeholder="tucorreo@duoc.cl"
                                         value={formulario.correo}
-                                        onChange={function (e) {
-                                            cambiarCampo("correo", e.target.value);
+                                        error={errores.correo}
+                                        errorId="errorCorreoContacto"
+                                        onChange={function (valor) {
+                                            cambiarCampo("correo", valor);
                                         }}
                                     />
-                                    <div
-                                        className={"error-msj" + (errores.correo ? " visible" : "")}
-                                        id="errorCorreoContacto"
-                                    >
-                                        {errores.correo}
-                                    </div>
                                 </div>
 
                                 <div className="mb-3">
-                                    <label htmlFor="comentarioContacto" className="form-label">
-                                        Comentario
-                                    </label>
-                                    <textarea
-                                        className={claseCampo(formulario.comentario, errores.comentario)}
+                                    <CampoFormulario
+                                        as="textarea"
+                                        label="Comentario"
                                         id="comentarioContacto"
                                         rows="5"
                                         maxLength="500"
                                         placeholder="Cuéntanos en qué podemos ayudarte"
                                         value={formulario.comentario}
-                                        onChange={function (e) {
-                                            cambiarCampo("comentario", e.target.value);
+                                        error={errores.comentario}
+                                        errorId="errorComentarioContacto"
+                                        contador
+                                        contadorId="contadorComentario"
+                                        onChange={function (valor) {
+                                            cambiarCampo("comentario", valor);
                                         }}
                                     />
-                                    <div className="d-flex justify-content-between">
-                                        <div
-                                            className={
-                                                "error-msj" +
-                                                (errores.comentario ? " visible" : "")
-                                            }
-                                            id="errorComentarioContacto"
-                                        >
-                                            {errores.comentario}
-                                        </div>
-                                        <small className="text-secondary" id="contadorComentario">
-                                            {formulario.comentario.length} / 500
-                                        </small>
-                                    </div>
                                 </div>
 
                                 <div
@@ -178,9 +147,9 @@ function Contact() {
                                     {aviso}
                                 </div>
 
-                                <button type="submit" className="btn btn-acento w-100">
+                                <Boton type="submit" variante="acento" bloque>
                                     Enviar mensaje
-                                </button>
+                                </Boton>
                             </form>
                         </Card>
                     </Col>

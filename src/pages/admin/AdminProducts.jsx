@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import { Card, Table, Modal, Row, Col } from "react-bootstrap";
+import { Card, Table, Modal } from "react-bootstrap";
 import AlertMessage from "../../components/AlertMessage";
-import { formatoCL } from "../../utils/formato";
+import Boton from "../../components/Boton";
+import EncabezadoPanel from "../../components/EncabezadoPanel";
+import EstadoVacio from "../../components/EstadoVacio";
+import Precio from "../../components/Precio";
+import ProductoCampos from "../../components/ProductoCampos";
 import {
     crearProducto,
     actualizarProducto,
@@ -84,13 +88,6 @@ function hayErrores(errores) {
     return Object.keys(errores).some(function (campo) {
         return errores[campo] !== "";
     });
-}
-
-function claseCampo(valor, error, esSelect) {
-    const base = esSelect ? "form-select" : "form-control";
-    if (error) return base + " input-error";
-    if (valor) return base + " input-valido";
-    return base;
 }
 
 function AdminProducts({ productos, recargarProductos }) {
@@ -195,21 +192,18 @@ function AdminProducts({ productos, recargarProductos }) {
 
     return (
         <>
-            <div className="encabezado-panel mb-4">
-                <div>
-                    <h1 className="h3 mb-1">Gestión de productos</h1>
-                    <p className="text-secondary mb-0">
-                        Administra los productos disponibles en tu sitio.
-                    </p>
-                </div>
-                <button
-                    type="button"
-                    className="btn btn-outline-acento"
-                    onClick={restaurarCatalogo}
-                >
-                    Restaurar catálogo
-                </button>
-            </div>
+            <EncabezadoPanel
+                className="mb-4"
+                titulo="Gestión de productos"
+                tituloAs="h1"
+                tituloClassName="h3 mb-1"
+                subtitulo="Administra los productos disponibles en tu sitio."
+                accion={
+                    <Boton type="button" variante="outline" onClick={restaurarCatalogo}>
+                        Restaurar catálogo
+                    </Boton>
+                }
+            />
 
             <AlertMessage show={Boolean(aviso)}>{aviso}</AlertMessage>
 
@@ -241,9 +235,11 @@ function AdminProducts({ productos, recargarProductos }) {
                                         <td>{producto.codigo}</td>
                                         <td>{producto.nombre}</td>
                                         <td>{producto.categoria}</td>
-                                        <td className="clave-precio">
-                                            {formatoCL(producto.precio)}
-                                        </td>
+                                        <Precio
+                                            as="td"
+                                            className="clave-precio"
+                                            valor={producto.precio}
+                                        />
                                         <td>
                                             {critico ? (
                                                 <span className="alerta-stock">
@@ -254,22 +250,29 @@ function AdminProducts({ productos, recargarProductos }) {
                                             )}
                                         </td>
                                         <td>
-                                            <button
+                                            <Boton
                                                 type="button"
-                                                className="btn btn-sm btn-outline-acento me-2"
+                                                variante="outline"
+                                                tamano="sm"
+                                                className="me-2"
                                                 title="Editar"
-                                                onClick={function () { abrirEditar(producto); }}
+                                                onClick={function () {
+                                                    abrirEditar(producto);
+                                                }}
                                             >
                                                 ✏️
-                                            </button>
-                                            <button
+                                            </Boton>
+                                            <Boton
                                                 type="button"
-                                                className="btn btn-sm btn-outline-acento"
+                                                variante="outline"
+                                                tamano="sm"
                                                 title="Eliminar"
-                                                onClick={function () { eliminar(producto); }}
+                                                onClick={function () {
+                                                    eliminar(producto);
+                                                }}
                                             >
                                                 🗑️
-                                            </button>
+                                            </Boton>
                                         </td>
                                     </tr>
                                 );
@@ -278,9 +281,10 @@ function AdminProducts({ productos, recargarProductos }) {
                     </Table>
                 </div>
                 {productos.length === 0 ? (
-                    <p className="text-secondary small mb-0">
-                        No hay productos. Usa el formulario de abajo o restaura el catálogo.
-                    </p>
+                    <EstadoVacio
+                        variante="texto"
+                        mensaje="No hay productos. Usa el formulario de abajo o restaura el catálogo."
+                    />
                 ) : null}
             </Card>
 
@@ -288,184 +292,20 @@ function AdminProducts({ productos, recargarProductos }) {
                 <h2 className="h5 mb-3">Agregar producto al catálogo</h2>
 
                 <form id="formProducto" noValidate onSubmit={enviarNuevo}>
-                    <Row>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="codigoProducto">
-                                Código del producto
-                            </label>
-                            <input
-                                type="text"
-                                className={claseCampo(nuevo.codigo, erroresNuevo.codigo)}
-                                id="codigoProducto"
-                                maxLength="20"
-                                placeholder="ZAP-RUN-01"
-                                value={nuevo.codigo}
-                                onChange={function (e) {
-                                    cambiarNuevo("codigo", e.target.value);
-                                }}
-                            />
-                            <div
-                                className={
-                                    "error-msj" + (erroresNuevo.codigo ? " visible" : "")
-                                }
-                            >
-                                {erroresNuevo.codigo}
-                            </div>
-                        </Col>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="nombreProducto">
-                                Nombre
-                            </label>
-                            <input
-                                type="text"
-                                className={claseCampo(nuevo.nombre, erroresNuevo.nombre)}
-                                id="nombreProducto"
-                                maxLength="100"
-                                placeholder="Zapatilla Runner Pro"
-                                value={nuevo.nombre}
-                                onChange={function (e) {
-                                    cambiarNuevo("nombre", e.target.value);
-                                }}
-                            />
-                            <div
-                                className={
-                                    "error-msj" + (erroresNuevo.nombre ? " visible" : "")
-                                }
-                            >
-                                {erroresNuevo.nombre}
-                            </div>
-                        </Col>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="categoriaProducto">
-                                Categoría
-                            </label>
-                            <select
-                                className={claseCampo(
-                                    nuevo.categoria,
-                                    erroresNuevo.categoria,
-                                    true
-                                )}
-                                id="categoriaProducto"
-                                value={nuevo.categoria}
-                                onChange={function (e) {
-                                    cambiarNuevo("categoria", e.target.value);
-                                }}
-                            >
-                                <option value="">-- Selecciona una categoría --</option>
-                                <option value="Calzado">Calzado</option>
-                                <option value="Ropa">Ropa</option>
-                                <option value="Accesorios">Accesorios</option>
-                            </select>
-                            <div
-                                className={
-                                    "error-msj" +
-                                    (erroresNuevo.categoria ? " visible" : "")
-                                }
-                            >
-                                {erroresNuevo.categoria}
-                            </div>
-                        </Col>
-                    </Row>
-
-                    <div className="mb-3">
-                        <label className="form-label" htmlFor="descripcionProducto">
-                            Descripción (opcional)
-                        </label>
-                        <textarea
-                            className="form-control"
-                            id="descripcionProducto"
-                            rows="3"
-                            maxLength="500"
-                            placeholder="Descripción breve del producto"
-                            value={nuevo.descripcion}
-                            onChange={function (e) {
-                                cambiarNuevo("descripcion", e.target.value);
-                            }}
-                        />
-                    </div>
-
-                    <Row>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="precioProducto">
-                                Precio
-                            </label>
-                            <input
-                                type="text"
-                                className={claseCampo(nuevo.precio, erroresNuevo.precio)}
-                                id="precioProducto"
-                                placeholder="49990"
-                                value={nuevo.precio}
-                                onChange={function (e) {
-                                    cambiarNuevo("precio", e.target.value);
-                                }}
-                            />
-                            <div
-                                className={
-                                    "error-msj" + (erroresNuevo.precio ? " visible" : "")
-                                }
-                            >
-                                {erroresNuevo.precio}
-                            </div>
-                        </Col>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="stockProducto">
-                                Stock
-                            </label>
-                            <input
-                                type="text"
-                                className={claseCampo(nuevo.stock, erroresNuevo.stock)}
-                                id="stockProducto"
-                                placeholder="25"
-                                value={nuevo.stock}
-                                onChange={function (e) {
-                                    cambiarNuevo("stock", e.target.value);
-                                }}
-                            />
-                            <div
-                                className={"error-msj" + (erroresNuevo.stock ? " visible" : "")}
-                            >
-                                {erroresNuevo.stock}
-                            </div>
-                        </Col>
-                        <Col md={4} className="mb-3">
-                            <label className="form-label" htmlFor="stockCriticoProducto">
-                                Stock crítico (alertas)
-                            </label>
-                            <input
-                                type="text"
-                                className={claseCampo(
-                                    nuevo.stockCritico,
-                                    erroresNuevo.stockCritico
-                                )}
-                                id="stockCriticoProducto"
-                                placeholder="5"
-                                value={nuevo.stockCritico}
-                                onChange={function (e) {
-                                    cambiarNuevo("stockCritico", e.target.value);
-                                }}
-                            />
-                            <div
-                                className={
-                                    "error-msj" +
-                                    (erroresNuevo.stockCritico ? " visible" : "")
-                                }
-                            >
-                                {erroresNuevo.stockCritico}
-                            </div>
-                        </Col>
-                    </Row>
+                    <ProductoCampos
+                        datos={nuevo}
+                        errores={erroresNuevo}
+                        onCambiar={cambiarNuevo}
+                        conPlaceholders
+                    />
 
                     <div className="d-flex gap-2">
-                        <button type="submit" className="btn btn-acento">
+                        <Boton type="submit" variante="acento">
                             Agregar producto
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-outline-acento"
-                            onClick={limpiarNuevo}
-                        >
+                        </Boton>
+                        <Boton type="button" variante="outline" onClick={limpiarNuevo}>
                             Limpiar
-                        </button>
+                        </Boton>
                     </div>
                 </form>
             </Card>
@@ -478,186 +318,20 @@ function AdminProducts({ productos, recargarProductos }) {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Row>
-                            <Col md={4} className="mb-3">
-                                <label className="form-label" htmlFor="editarCodigoProducto">
-                                    Código
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(editar.codigo, erroresEditar.codigo)}
-                                    id="editarCodigoProducto"
-                                    maxLength="20"
-                                    value={editar.codigo}
-                                    onChange={function (e) {
-                                        cambiarEditar("codigo", e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={
-                                        "error-msj" +
-                                        (erroresEditar.codigo ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.codigo}
-                                </div>
-                            </Col>
-                            <Col md={4} className="mb-3">
-                                <label className="form-label" htmlFor="editarNombreProducto">
-                                    Nombre
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(editar.nombre, erroresEditar.nombre)}
-                                    id="editarNombreProducto"
-                                    maxLength="100"
-                                    value={editar.nombre}
-                                    onChange={function (e) {
-                                        cambiarEditar("nombre", e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={
-                                        "error-msj" +
-                                        (erroresEditar.nombre ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.nombre}
-                                </div>
-                            </Col>
-                            <Col md={4} className="mb-3">
-                                <label className="form-label" htmlFor="editarCategoriaProducto">
-                                    Categoría
-                                </label>
-                                <select
-                                    className={claseCampo(
-                                        editar.categoria,
-                                        erroresEditar.categoria,
-                                        true
-                                    )}
-                                    id="editarCategoriaProducto"
-                                    value={editar.categoria}
-                                    onChange={function (e) {
-                                        cambiarEditar("categoria", e.target.value);
-                                    }}
-                                >
-                                    <option value="">-- Selecciona una categoría --</option>
-                                    <option value="Calzado">Calzado</option>
-                                    <option value="Ropa">Ropa</option>
-                                    <option value="Accesorios">Accesorios</option>
-                                </select>
-                                <div
-                                    className={
-                                        "error-msj" +
-                                        (erroresEditar.categoria ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.categoria}
-                                </div>
-                            </Col>
-                        </Row>
-
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="editarDescripcionProducto">
-                                Descripción (opcional)
-                            </label>
-                            <textarea
-                                className="form-control"
-                                id="editarDescripcionProducto"
-                                rows="3"
-                                maxLength="500"
-                                value={editar.descripcion}
-                                onChange={function (e) {
-                                    cambiarEditar("descripcion", e.target.value);
-                                }}
-                            />
-                        </div>
-
-                        <Row>
-                            <Col md={4} className="mb-3">
-                                <label className="form-label" htmlFor="editarPrecioProducto">
-                                    Precio
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(editar.precio, erroresEditar.precio)}
-                                    id="editarPrecioProducto"
-                                    value={editar.precio}
-                                    onChange={function (e) {
-                                        cambiarEditar("precio", e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={
-                                        "error-msj" +
-                                        (erroresEditar.precio ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.precio}
-                                </div>
-                            </Col>
-                            <Col md={4} className="mb-3">
-                                <label className="form-label" htmlFor="editarStockProducto">
-                                    Stock
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(editar.stock, erroresEditar.stock)}
-                                    id="editarStockProducto"
-                                    value={editar.stock}
-                                    onChange={function (e) {
-                                        cambiarEditar("stock", e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={
-                                        "error-msj" + (erroresEditar.stock ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.stock}
-                                </div>
-                            </Col>
-                            <Col md={4} className="mb-3">
-                                <label
-                                    className="form-label"
-                                    htmlFor="editarStockCriticoProducto"
-                                >
-                                    Stock crítico
-                                </label>
-                                <input
-                                    type="text"
-                                    className={claseCampo(
-                                        editar.stockCritico,
-                                        erroresEditar.stockCritico
-                                    )}
-                                    id="editarStockCriticoProducto"
-                                    value={editar.stockCritico}
-                                    onChange={function (e) {
-                                        cambiarEditar("stockCritico", e.target.value);
-                                    }}
-                                />
-                                <div
-                                    className={
-                                        "error-msj" +
-                                        (erroresEditar.stockCritico ? " visible" : "")
-                                    }
-                                >
-                                    {erroresEditar.stockCritico}
-                                </div>
-                            </Col>
-                        </Row>
+                        <ProductoCampos
+                            idPrefix="editar"
+                            datos={editar}
+                            errores={erroresEditar}
+                            onCambiar={cambiarEditar}
+                        />
                     </Modal.Body>
                     <Modal.Footer>
-                        <button
-                            type="button"
-                            className="btn btn-outline-acento"
-                            onClick={cerrarEditar}
-                        >
+                        <Boton type="button" variante="outline" onClick={cerrarEditar}>
                             Cancelar
-                        </button>
-                        <button type="submit" className="btn btn-acento">
+                        </Boton>
+                        <Boton type="submit" variante="acento">
                             Guardar cambios
-                        </button>
+                        </Boton>
                     </Modal.Footer>
                 </form>
             </Modal>

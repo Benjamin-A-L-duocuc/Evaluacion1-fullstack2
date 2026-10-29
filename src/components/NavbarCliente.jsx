@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import Boton from "./Boton";
 
 function NavbarCliente({ sesion, onCerrarSesion }) {
     const ubicacion = useLocation();
@@ -62,12 +63,12 @@ function NavbarCliente({ sesion, onCerrarSesion }) {
                             </a>
                         </Nav.Item>
                     </Nav>
-                    <Link
+                    <Boton
                         to="/carrito"
-                        className="btn btn-acento ms-lg-3 d-inline-flex align-items-center gap-2"
+                        className="ms-lg-3 d-inline-flex align-items-center gap-2"
                     >
                         🛒 Carrito
-                    </Link>
+                    </Boton>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

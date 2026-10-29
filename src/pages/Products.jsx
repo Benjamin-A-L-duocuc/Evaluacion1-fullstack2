@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import Boton from "../components/Boton";
+import CampoFormulario from "../components/CampoFormulario";
+import EstadoVacio from "../components/EstadoVacio";
+import HeroSeccion from "../components/HeroSeccion";
 import ProductCard from "../components/ProductCard";
 
 function Products({ productos, onAgregar }) {
@@ -40,69 +44,51 @@ function Products({ productos, onAgregar }) {
 
     return (
         <>
-            <header className="hero py-5">
-                <Container>
-                    <h1 className="display-5 fw-bold mb-2">Catálogo de productos</h1>
-                    <p className="lead mb-0">
-                        Ropa y artículos deportivos seleccionados para tu entrenamiento.
-                    </p>
-                </Container>
-            </header>
+            <HeroSeccion
+                titulo="Catálogo de productos"
+                subtitulo="Ropa y artículos deportivos seleccionados para tu entrenamiento."
+            />
 
             <main className="py-5">
                 <Container>
                     <Row className="g-2 align-items-end mb-4">
                         <Col md={7}>
-                            <label className="form-label" htmlFor="buscarProducto">
-                                Buscar producto
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control"
+                            <CampoFormulario
+                                label="Buscar producto"
                                 id="buscarProducto"
                                 placeholder="Ej: zapatilla, polera, mancuernas..."
                                 value={busqueda}
-                                onChange={function (e) { setBusqueda(e.target.value); }}
+                                onChange={setBusqueda}
                             />
                         </Col>
                         <Col md={3}>
-                            <label className="form-label" htmlFor="filtroCategoria">
-                                Categoría
-                            </label>
-                            <select
-                                className="form-select"
+                            <CampoFormulario
+                                as="select"
+                                label="Categoría"
                                 id="filtroCategoria"
                                 value={categoria}
-                                onChange={function (e) { setCategoria(e.target.value); }}
-                            >
-                                <option value="Todas">Todas</option>
-                                {categorias.map(function (nombre) {
-                                    return (
-                                        <option key={nombre} value={nombre}>
-                                            {nombre}
-                                        </option>
-                                    );
-                                })}
-                            </select>
+                                options={["Todas"].concat(categorias)}
+                                onChange={setCategoria}
+                            />
                         </Col>
                         <Col md={2}>
-                            <button
+                            <Boton
                                 type="button"
-                                className="btn btn-outline-acento w-100"
+                                variante="outline"
+                                className="w-100"
                                 onClick={limpiarFiltros}
                             >
                                 Limpiar
-                            </button>
+                            </Boton>
                         </Col>
                     </Row>
 
                     {filtrados.length === 0 ? (
-                        <div className="card p-4 text-center">
-                            <p className="mb-1">No encontramos productos con esos filtros.</p>
-                            <p className="text-secondary small mb-0">
-                                Prueba con otra búsqueda o categoría.
-                            </p>
-                        </div>
+                        <EstadoVacio
+                            titulo="No encontramos productos con esos filtros."
+                            tituloClassName="mb-1"
+                            mensaje="Prueba con otra búsqueda o categoría."
+                        />
                     ) : (
                         <Row className="justify-content-center g-4">
                             {filtrados.map(function (producto) {
